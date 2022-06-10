@@ -215,3 +215,9 @@ buildNumber.properties
 *.xhtml
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,intellij+iml,maven,java,web,database
+task-project-api/src/main/resources/application.properties
+task-gateway/src/main/resources/application.properties
+task-account-api/src/main/resources/application.properties
+task-account-api/.mvn
+task-gateway/.mvn
+task-project-api/.mvn
