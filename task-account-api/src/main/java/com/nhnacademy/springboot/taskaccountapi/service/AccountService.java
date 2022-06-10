@@ -5,4 +5,6 @@ import com.nhnacademy.springboot.taskaccountapi.request.AccountRequest;
 
 public interface AccountService {
     AccountVO register(AccountRequest accountRequest);
+
+    String delete(String id);
 }

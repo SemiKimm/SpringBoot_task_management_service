@@ -8,3 +8,9 @@ Host: localhost:9090
   "email": "admin@dooray.com",
   "authority": "ROLE_ADMIN"
 }
+
+###
+
+GET /account/delete/admin1
+Content-Type: application/json
+Host: localhost:9090

@@ -1,14 +1,10 @@
 package com.nhnacademy.springboot.taskaccountapi.controller;
 
 import com.nhnacademy.springboot.taskaccountapi.domain.AccountVO;
-import com.nhnacademy.springboot.taskaccountapi.entity.Account;
 import com.nhnacademy.springboot.taskaccountapi.request.AccountRequest;
 import com.nhnacademy.springboot.taskaccountapi.service.AccountService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -19,5 +15,10 @@ public class AccountRestController {
     @PostMapping("/register")
     public AccountVO doRegister(@RequestBody AccountRequest accountRequest){
         return accountService.register(accountRequest);
+    }
+
+    @GetMapping("/delete/{id}")
+    public String doDelete(@PathVariable("id") String id){
+        return accountService.delete(id);
     }
 }

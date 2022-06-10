@@ -28,6 +28,19 @@ public class AccountServiceImpl implements AccountService {
         account.setAuthority(authority);
         accountRepository.saveAndFlush(account);
 
-        return new AccountVO(account.getId(), account.getPassword(), account.getEmail(), authority.getAuthority());
+        return new AccountVO(account.getId(),
+                account.getPassword(),
+                account.getEmail(),
+                authority.getAuthority(),
+                account.getState());
+    }
+
+    @Override
+    public String delete(String id) {
+        if(!accountRepository.existsById(id)){
+            throw new IllegalStateException("not exist account : " + id);
+        }
+        accountRepository.deleteAccountByState(id);
+        return "{\"result\":\"success\"}";
     }
 }
