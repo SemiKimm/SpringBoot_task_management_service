@@ -11,7 +11,6 @@ import javax.persistence.*;
 @Table(name = "tool_accounts")
 public class Account {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "account_id", nullable = false)
     private String id;
     @Column(name = "account_password", nullable = false)
@@ -21,8 +20,7 @@ public class Account {
     @Column(name = "account_state", nullable = false)
     private String state;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE},fetch = FetchType.LAZY)
-    @JoinColumn(name = "account_id")
+    @OneToOne(mappedBy = "account", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     private Authority authority;
 
     public static Account create(String id, String pwd, String email){
@@ -30,6 +28,7 @@ public class Account {
         account.setId(id);
         account.setPassword(pwd);
         account.setEmail(email);
+        account.setState("가입");
 
         return account;
     }

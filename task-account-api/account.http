@@ -1,0 +1,10 @@
+POST /account/register
+Content-Type: application/json
+Host: localhost:9090
+
+{
+  "id": "admin1",
+  "password": "adminhashcodeblahblahblah",
+  "email": "admin@dooray.com",
+  "authority": "ROLE_ADMIN"
+}
