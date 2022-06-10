@@ -1,6 +1,6 @@
-# SpringBoot_task_management_tool_service
+# SpringBoot_task_management_service
 1. 개요
-    1. 업무 관리 tool 서비스 구현
+    1. 업무 관리 서비스 구현
         1. 주요 제공 기능
             1. 회원 계정 / 관리 기능
                 1. 로그인/로그아웃
