@@ -1,5 +1,6 @@
 package com.nhnacademy.springboot.taskaccountapi.entity;
 
+import com.nhnacademy.springboot.taskaccountapi.enumm.State;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -28,7 +29,7 @@ public class Account {
         account.setId(id);
         account.setPassword(pwd);
         account.setEmail(email);
-        account.setState("가입");
+        account.setState(State.JOIN.getState());
 
         return account;
     }

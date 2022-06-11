@@ -3,6 +3,7 @@ package com.nhnacademy.springboot.taskaccountapi.service.impl;
 import com.nhnacademy.springboot.taskaccountapi.domain.AccountVO;
 import com.nhnacademy.springboot.taskaccountapi.entity.Account;
 import com.nhnacademy.springboot.taskaccountapi.entity.Authority;
+import com.nhnacademy.springboot.taskaccountapi.enumm.State;
 import com.nhnacademy.springboot.taskaccountapi.repository.AccountRepository;
 import com.nhnacademy.springboot.taskaccountapi.request.AccountRequest;
 import com.nhnacademy.springboot.taskaccountapi.service.AccountService;
@@ -40,7 +41,7 @@ public class AccountServiceImpl implements AccountService {
         if(!accountRepository.existsById(id)){
             throw new IllegalStateException("not exist account : " + id);
         }
-        accountRepository.updateAccountState(id, "탈퇴");
+        accountRepository.updateAccountState(id, State.WITHDRAWAL.getState());
         return "{\"result\":\"delete success\"}";
     }
 
@@ -49,7 +50,7 @@ public class AccountServiceImpl implements AccountService {
         if(isDeletedAccount(id)){
             throw new IllegalStateException("already deleted : " + id);
         }
-        accountRepository.updateAccountState(id, "휴면");
+        accountRepository.updateAccountState(id, State.DORMANCY.getState());
         return "{\"result\":\"inactivate success\"}";
     }
 
@@ -57,6 +58,6 @@ public class AccountServiceImpl implements AccountService {
         Account account = accountRepository
                 .findById(id)
                 .orElseThrow(() -> new IllegalStateException("not exist account : " + id));
-        return account.getState().equals("탈퇴"); // fixme : "탈퇴", "휴면", "가입" -> enum 으로 만들기??
+        return account.getState().equals(State.WITHDRAWAL.getState());
     }
 }
