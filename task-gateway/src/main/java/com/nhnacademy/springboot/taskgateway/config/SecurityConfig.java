@@ -1,0 +1,54 @@
+package com.nhnacademy.springboot.taskgateway.config;
+
+import com.nhnacademy.springboot.taskgateway.auth.LoginSuccessHandler;
+import com.nhnacademy.springboot.taskgateway.service.impl.UserDetailsServiceImpl;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
+@EnableWebSecurity(debug = true)
+@Configuration
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .anyRequest().permitAll()
+                .and()
+                .formLogin()
+                .successHandler(loginSuccessHandler(null))
+                .and()
+                .logout()
+                .and()
+                .csrf().disable()
+                .sessionManagement()
+                .sessionFixation().none();
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(authenticationProvider(null));
+    }
+
+    @Bean
+    public AuthenticationProvider authenticationProvider(
+            UserDetailsServiceImpl userDetailsServiceImpl) {
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+        authenticationProvider.setUserDetailsService(userDetailsServiceImpl);
+        authenticationProvider.setPasswordEncoder(new BCryptPasswordEncoder());
+
+        return authenticationProvider;
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler loginSuccessHandler(RedisTemplate<String, String> redisTemplate) {
+        return new LoginSuccessHandler(redisTemplate);
+    }
+}
