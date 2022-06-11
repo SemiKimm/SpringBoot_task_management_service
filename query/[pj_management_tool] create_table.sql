@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS tool_accounts;
 
 create table tool_accounts(
 	account_id VARCHAR(20) NOT NULL,
-    account_password VARCHAR(32) NOT NULL,
+    account_password VARCHAR(300) NOT NULL,
     account_email VARCHAR(100) NOT NULL,
     account_state VARCHAR(20) NOT NULL,
 	PRIMARY KEY (account_id)

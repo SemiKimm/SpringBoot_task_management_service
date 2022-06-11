@@ -66,6 +66,11 @@ public class AccountServiceImpl implements AccountService {
                 account.getAuthority().getAuthority());
     }
 
+    @Override
+    public Boolean isExists(String id) {
+        return accountRepository.existsById(id);
+    }
+
     private boolean isDeletedAccount(String id){
         Account account = accountRepository
                 .findById(id)

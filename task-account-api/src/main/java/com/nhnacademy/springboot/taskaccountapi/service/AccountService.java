@@ -1,7 +1,6 @@
 package com.nhnacademy.springboot.taskaccountapi.service;
 
 import com.nhnacademy.springboot.taskaccountapi.domain.AccountVO;
-import com.nhnacademy.springboot.taskaccountapi.entity.Account;
 import com.nhnacademy.springboot.taskaccountapi.request.AccountRequest;
 
 public interface AccountService {
@@ -12,4 +11,6 @@ public interface AccountService {
     String inactivate(String id);
 
     AccountVO getAccountVO(String id);
+
+    Boolean isExists(String id);
 }

@@ -31,4 +31,9 @@ public class AccountRestController {
     public AccountVO getAccount(@PathVariable("id") String id){
         return accountService.getAccountVO(id);
     }
+
+    @GetMapping("/check/{id}")
+    public Boolean checkIdDuplication(@PathVariable("id") String id){
+        return accountService.isExists(id);
+    }
 }
