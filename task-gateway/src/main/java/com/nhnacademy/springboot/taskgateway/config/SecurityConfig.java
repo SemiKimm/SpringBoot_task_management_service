@@ -2,7 +2,6 @@ package com.nhnacademy.springboot.taskgateway.config;
 
 import com.nhnacademy.springboot.taskgateway.auth.LoginSuccessHandler;
 import com.nhnacademy.springboot.taskgateway.auth.LogoutHandlerImpl;
-import com.nhnacademy.springboot.taskgateway.auth.LogoutSuccessHandlerImpl;
 import com.nhnacademy.springboot.taskgateway.service.impl.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +16,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
-import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 @EnableWebSecurity(debug = true)
 @Configuration
@@ -25,7 +23,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/signIn").anonymous()
+                .antMatchers("/account/register").anonymous()
                 .anyRequest().permitAll()
+                .and()
+                .exceptionHandling()
+                .accessDeniedPage("/error/403")
                 .and()
                 .formLogin()
                     .usernameParameter("id")
@@ -37,8 +40,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .and()
                 .logout()
                     .deleteCookies("JSESSIONID","SESSION")
+                    .invalidateHttpSession(true)
+                    .logoutSuccessUrl("/")
                     .addLogoutHandler(logoutHandler(null))
-                    .logoutSuccessHandler(logoutSuccessHandler())
                         .and()
                 .csrf().disable()
                 .sessionManagement()
@@ -67,11 +71,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public LogoutHandler logoutHandler(RedisTemplate<String, String> redisTemplate){
         return new LogoutHandlerImpl(redisTemplate);
-    }
-
-    @Bean
-    public LogoutSuccessHandler logoutSuccessHandler(){
-        return new LogoutSuccessHandlerImpl();
     }
 
     @Bean
