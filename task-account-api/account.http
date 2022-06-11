@@ -11,7 +11,7 @@ Host: localhost:9090
 
 ###
 
-GET /account/delete/admin3
+GET /account/delete/invalid
 Content-Type: application/json
 Host: localhost:9090
 
