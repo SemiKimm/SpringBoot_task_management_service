@@ -54,6 +54,6 @@ public class AccountAdapterImpl implements AccountAdapter {
                 HttpMethod.GET,
                 requestEntity,
                 new ParameterizedTypeReference<>() {});
-        return exchange.getBody();
+        return Boolean.TRUE.equals(exchange.getBody());
     }
 }
