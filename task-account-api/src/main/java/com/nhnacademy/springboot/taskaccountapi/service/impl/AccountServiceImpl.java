@@ -32,8 +32,8 @@ public class AccountServiceImpl implements AccountService {
         return new AccountVO(account.getId(),
                 account.getPassword(),
                 account.getEmail(),
-                authority.getAuthority(),
-                account.getState());
+                account.getState(),
+                authority.getAuthority());
     }
 
     @Override
@@ -52,6 +52,18 @@ public class AccountServiceImpl implements AccountService {
         }
         accountRepository.updateAccountState(id, State.DORMANCY.getState());
         return "{\"result\":\"inactivate success\"}";
+    }
+
+    @Override
+    public AccountVO getAccountVO(String id) {
+        Account account = accountRepository
+                .findById(id)
+                .orElseThrow(() -> new IllegalStateException("not exist account : " + id));
+        return new AccountVO(account.getId(),
+                account.getPassword(),
+                account.getEmail(),
+                account.getState(),
+                account.getAuthority().getAuthority());
     }
 
     private boolean isDeletedAccount(String id){

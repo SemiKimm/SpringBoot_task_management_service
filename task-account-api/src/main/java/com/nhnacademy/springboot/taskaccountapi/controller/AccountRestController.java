@@ -26,4 +26,9 @@ public class AccountRestController {
     public String doInactivate(@PathVariable("id") String id){
         return accountService.inactivate(id);
     }
+
+    @GetMapping("/{id}")
+    public AccountVO getAccount(@PathVariable("id") String id){
+        return accountService.getAccountVO(id);
+    }
 }

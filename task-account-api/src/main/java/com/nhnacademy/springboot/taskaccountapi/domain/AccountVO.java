@@ -9,6 +9,6 @@ public class AccountVO {
     String id;
     String password;
     String email;
-    String authority;
     String state;
+    String authority;
 }
