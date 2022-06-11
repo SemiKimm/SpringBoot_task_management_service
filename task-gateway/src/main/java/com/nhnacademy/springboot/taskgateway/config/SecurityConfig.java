@@ -1,6 +1,8 @@
 package com.nhnacademy.springboot.taskgateway.config;
 
 import com.nhnacademy.springboot.taskgateway.auth.LoginSuccessHandler;
+import com.nhnacademy.springboot.taskgateway.auth.LogoutHandlerImpl;
+import com.nhnacademy.springboot.taskgateway.auth.LogoutSuccessHandlerImpl;
 import com.nhnacademy.springboot.taskgateway.service.impl.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +16,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.LogoutHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 @EnableWebSecurity(debug = true)
 @Configuration
@@ -32,6 +36,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .successHandler(loginSuccessHandler(null))
                         .and()
                 .logout()
+                .deleteCookies("JSESSIONID","SESSION")
+                .addLogoutHandler(logoutHandler(null))
+                .logoutSuccessHandler(logoutSuccessHandler())
                 .and()
                 .csrf().disable()
                 .sessionManagement()
@@ -49,13 +56,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsServiceImpl);
         authenticationProvider.setPasswordEncoder(new BCryptPasswordEncoder());
-
         return authenticationProvider;
     }
 
     @Bean
     public AuthenticationSuccessHandler loginSuccessHandler(RedisTemplate<String, String> redisTemplate) {
         return new LoginSuccessHandler(redisTemplate);
+    }
+
+    @Bean
+    public LogoutHandler logoutHandler(RedisTemplate<String, String> redisTemplate){
+        return new LogoutHandlerImpl(redisTemplate);
+    }
+
+    @Bean
+    public LogoutSuccessHandler logoutSuccessHandler(){
+        return new LogoutSuccessHandlerImpl();
     }
 
     @Bean
