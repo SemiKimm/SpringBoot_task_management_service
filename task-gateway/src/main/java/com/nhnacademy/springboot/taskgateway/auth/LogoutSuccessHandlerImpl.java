@@ -19,5 +19,7 @@ public class LogoutSuccessHandlerImpl implements LogoutSuccessHandler {
         if(Objects.nonNull(session)){
             session.invalidate();
         }
+
+        response.sendRedirect("/");
     }
 }
