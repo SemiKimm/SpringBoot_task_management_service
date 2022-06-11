@@ -3,14 +3,20 @@ Content-Type: application/json
 Host: localhost:9090
 
 {
-  "id": "admin1",
-  "password": "adminhashcodeblahblahblah",
-  "email": "admin@dooray.com",
+  "id": "admin2",
+  "password": "admin2hashcodeblahblahblah",
+  "email": "admin2@dooray.com",
   "authority": "ROLE_ADMIN"
 }
 
 ###
 
 GET /account/delete/admin1
+Content-Type: application/json
+Host: localhost:9090
+
+###
+
+GET /account/inactivate/admin2
 Content-Type: application/json
 Host: localhost:9090

@@ -21,4 +21,9 @@ public class AccountRestController {
     public String doDelete(@PathVariable("id") String id){
         return accountService.delete(id);
     }
+
+    @GetMapping("/inactivate/{id}")
+    public String doInactivate(@PathVariable("id") String id){
+        return accountService.inactivate(id);
+    }
 }

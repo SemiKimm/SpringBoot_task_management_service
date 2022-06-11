@@ -40,7 +40,23 @@ public class AccountServiceImpl implements AccountService {
         if(!accountRepository.existsById(id)){
             throw new IllegalStateException("not exist account : " + id);
         }
-        accountRepository.deleteAccountByState(id);
-        return "{\"result\":\"success\"}";
+        accountRepository.updateAccountState(id, "탈퇴");
+        return "{\"result\":\"delete success\"}";
+    }
+
+    @Override
+    public String inactivate(String id) {
+        if(isDeletedAccount(id)){
+            throw new IllegalStateException("already deleted : " + id);
+        }
+        accountRepository.updateAccountState(id, "휴면");
+        return "{\"result\":\"inactivate success\"}";
+    }
+
+    private boolean isDeletedAccount(String id){
+        Account account = accountRepository
+                .findById(id)
+                .orElseThrow(() -> new IllegalStateException("not exist account : " + id));
+        return account.getState().equals("탈퇴"); // fixme : "탈퇴", "휴면", "가입" -> enum 으로 만들기??
     }
 }

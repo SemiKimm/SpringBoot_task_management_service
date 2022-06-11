@@ -12,6 +12,7 @@ public interface AccountRepository extends JpaRepository<Account, String> {
 
     @Transactional
     @Modifying
-    @Query("update Account a set a.state = '탈퇴' where a.id = :id")
-    void deleteAccountByState(@Param("id") String id);
+    @Query("update Account a set a.state = :state where a.id = :id")
+    void updateAccountState(@Param("id") String id,
+                            @Param("state") String state);
 }

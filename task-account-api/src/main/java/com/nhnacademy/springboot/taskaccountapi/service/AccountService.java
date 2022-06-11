@@ -7,4 +7,6 @@ public interface AccountService {
     AccountVO register(AccountRequest accountRequest);
 
     String delete(String id);
+
+    String inactivate(String id);
 }
