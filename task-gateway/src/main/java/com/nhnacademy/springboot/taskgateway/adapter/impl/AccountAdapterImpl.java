@@ -1,6 +1,7 @@
 package com.nhnacademy.springboot.taskgateway.adapter.impl;
 
 import com.nhnacademy.springboot.taskgateway.adapter.AccountAdapter;
+import com.nhnacademy.springboot.taskgateway.domain.AccountRegisterRequestDto;
 import com.nhnacademy.springboot.taskgateway.domain.AccountVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
@@ -23,6 +24,33 @@ public class AccountAdapterImpl implements AccountAdapter {
 
         HttpEntity<String> requestEntity = new HttpEntity<>(httpHeaders);
         ResponseEntity<AccountVO> exchange = restTemplate.exchange("http://localhost:9090/account/" + username,
+                HttpMethod.GET,
+                requestEntity,
+                new ParameterizedTypeReference<>() {});
+        return exchange.getBody();
+    }
+
+    @Override
+    public AccountVO create(AccountRegisterRequestDto account) {
+        RequestEntity<AccountRegisterRequestDto> requestEntity = RequestEntity
+                .post("http://localhost:9090/account/register")
+                .accept(MediaType.APPLICATION_JSON)
+                .body(account);
+
+        ResponseEntity<AccountVO> exchange = restTemplate.exchange(requestEntity,
+                new ParameterizedTypeReference<>() {});
+
+        return exchange.getBody();
+    }
+
+    @Override
+    public boolean checkIdExists(String id) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        httpHeaders.setAccept(List.of(MediaType.APPLICATION_JSON));
+
+        HttpEntity<String> requestEntity = new HttpEntity<>(httpHeaders);
+        ResponseEntity<Boolean> exchange = restTemplate.exchange("http://localhost:9090/account/check/" + id,
                 HttpMethod.GET,
                 requestEntity,
                 new ParameterizedTypeReference<>() {});
