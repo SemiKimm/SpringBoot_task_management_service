@@ -6,3 +6,7 @@ Host: localhost:9999
   "taskNo": 1,
   "tagNo": 3
 }
+###
+DELETE /task/tag/1/3
+Content-Type: application/json
+Host: localhost:9999

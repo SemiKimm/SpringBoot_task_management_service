@@ -5,4 +5,6 @@ import com.nhnacademy.springboot.taskprojectapi.request.TaskTagRequest;
 
 public interface TaskTagService {
     TaskTag register(TaskTagRequest taskTagRequest);
+
+    String deleteTaskTag(Integer taskNo, Integer tagNo);
 }

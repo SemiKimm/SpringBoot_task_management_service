@@ -33,4 +33,15 @@ public class TaskTagServiceImpl implements TaskTagService {
 
         return taskTagRepository.saveAndFlush(taskTag);
     }
+
+    @Override
+    public String deleteTaskTag(Integer taskNo, Integer tagNo) {
+        TaskTagPk pk = new TaskTagPk(taskNo, tagNo);
+        TaskTag taskTag = taskTagRepository
+                .findById(pk)
+                .orElseThrow(() -> new IllegalStateException("not exist taskTag"));
+
+        taskTagRepository.delete(taskTag);
+        return "{\"result\":\"delete success\"}";
+    }
 }
