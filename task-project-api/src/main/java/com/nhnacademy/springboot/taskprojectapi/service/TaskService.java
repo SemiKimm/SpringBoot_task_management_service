@@ -8,4 +8,6 @@ public interface TaskService {
     Task register(Integer projectNo, String participantId, TaskRegisterRequest taskRegisterRequest);
 
     Integer modify(Integer taskNo, TaskModifyRequest taskModifyRequest);
+
+    String deleteTask(Integer taskNo);
 }

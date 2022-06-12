@@ -46,4 +46,13 @@ public class TaskServiceImpl implements TaskService {
                     taskModifyRequest.getTitle(),
                     taskModifyRequest.getContent());
     }
+
+    @Override
+    public String deleteTask(Integer taskNo) {
+        if(!taskRepository.existsById(taskNo)){
+            throw new IllegalStateException("not exist task : " + taskNo);
+        }
+        taskRepository.deleteById(taskNo);
+        return "{\"result\":\"delete success\"}";
+    }
 }

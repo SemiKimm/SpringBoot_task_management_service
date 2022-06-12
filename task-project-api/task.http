@@ -17,3 +17,9 @@ Host: localhost:9999
   "title" : "업무(수정)",
   "content" : "업무 내용(수정)"
 }
+
+###
+
+DELETE /task/1
+Content-Type: application/json
+Host: localhost:9999
