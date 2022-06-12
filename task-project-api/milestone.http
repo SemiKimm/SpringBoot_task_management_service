@@ -1,0 +1,19 @@
+POST /milestone/register/1
+Content-Type: application/json
+Host: localhost:9999
+
+{
+ "name": "버전 1.0 배포"
+}
+
+###
+
+POST /milestone/register/1
+Content-Type: application/json
+Host: localhost:9999
+
+{
+  "name": "버전 2.0 배포",
+  "startDate": "20220611",
+  "finishDate": "20220614"
+}

@@ -25,6 +25,7 @@ create table tool_project_participants(
 create table tool_milestones(
 	milestone_no int not null auto_increment,
     milestone_name varchar(30) not null,
+    milestone_state varchar(20) not null,
     milestone_start_date date null,
     milestone_finish_date date null,
     project_no int not null,
