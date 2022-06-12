@@ -16,5 +16,5 @@ public interface ParticipantService {
 
     List<ParticipantDto> getParticipants(Integer projectNo);
 
-    Boolean exists(Integer projectNo, String memberId);
+    Boolean exists(Integer projectNo, String accountId);
 }

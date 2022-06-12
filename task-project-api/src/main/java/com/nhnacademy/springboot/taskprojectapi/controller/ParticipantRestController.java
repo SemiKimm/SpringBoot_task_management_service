@@ -30,9 +30,9 @@ public class ParticipantRestController {
         return participantService.getParticipants(projectNo);
     }
 
-    @GetMapping("/check/{projectNo}/{memberId}")
+    @GetMapping("/check/{projectNo}/{accountId}")
     public Boolean checkDuplication(@PathVariable("projectNo") Integer projectNo,
-                                    @PathVariable("memberId") String memberId){
-        return participantService.exists(projectNo, memberId);
+                                    @PathVariable("accountId") String accountId){
+        return participantService.exists(projectNo, accountId);
     }
 }
