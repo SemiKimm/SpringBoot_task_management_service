@@ -26,7 +26,13 @@ public class ParticipantRestController {
     }
 
     @GetMapping("/{projectNo}")
-    public List<ParticipantDto> participantList(@PathVariable("projectNo") Integer projectNo){
+    public List<ParticipantDto> getParticipantList(@PathVariable("projectNo") Integer projectNo){
         return participantService.getParticipants(projectNo);
+    }
+
+    @GetMapping("/check/{projectNo}/{memberId}")
+    public Boolean checkDuplication(@PathVariable("projectNo") Integer projectNo,
+                                    @PathVariable("memberId") String memberId){
+        return participantService.exists(projectNo, memberId);
     }
 }

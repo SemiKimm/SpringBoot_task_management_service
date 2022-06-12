@@ -61,4 +61,13 @@ public class ParticipantServiceImpl implements ParticipantService {
         }
         return participantRepository.findParticipantsBy(projectNo);
     }
+
+    @Override
+    public Boolean exists(Integer projectNo, String memberId) {
+        if(!projectRepository.existsById(projectNo)){
+            throw new IllegalArgumentException("not exist project : " + projectNo);
+        }
+        ParticipantPk pk = new ParticipantPk(memberId, projectNo);
+        return participantRepository.existsById(pk);
+    }
 }

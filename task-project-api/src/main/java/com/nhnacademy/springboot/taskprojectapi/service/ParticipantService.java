@@ -15,4 +15,6 @@ public interface ParticipantService {
     String deleteMember(Integer projectNo, String memberId);
 
     List<ParticipantDto> getParticipants(Integer projectNo);
+
+    Boolean exists(Integer projectNo, String memberId);
 }
