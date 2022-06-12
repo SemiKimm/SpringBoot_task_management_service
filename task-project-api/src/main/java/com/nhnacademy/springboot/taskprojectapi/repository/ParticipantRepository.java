@@ -1,4 +1,8 @@
 package com.nhnacademy.springboot.taskprojectapi.repository;
 
-public interface ParticipantRepository {
+import com.nhnacademy.springboot.taskprojectapi.entity.Participant;
+import com.nhnacademy.springboot.taskprojectapi.entity.pk.ParticipantPk;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ParticipantRepository extends JpaRepository<Participant, ParticipantPk> {
 }
