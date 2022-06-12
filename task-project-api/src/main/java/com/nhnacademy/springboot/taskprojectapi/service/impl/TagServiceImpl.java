@@ -16,13 +16,21 @@ public class TagServiceImpl implements TagService {
     private final ProjectRepository projectRepository;
 
     @Override
-    public Tag register(Integer projectNo, TagRequest tagRequest) {
+    public Tag register(Integer projectNo, String name) {
         Project project = projectRepository
                 .findById(projectNo)
                 .orElseThrow(() -> new IllegalStateException("not exist project : " + projectNo));
 
-        Tag tag = Tag.create(tagRequest.getName(), project);
+        Tag tag = Tag.create(name, project);
 
         return tagRepository.save(tag);
+    }
+
+    @Override
+    public Integer modify(Integer tagNo, String name) {
+        if(!tagRepository.existsById(tagNo)){
+            throw new IllegalStateException("not exist tag : " + tagNo);
+        }
+        return tagRepository.update(tagNo, name);
     }
 }

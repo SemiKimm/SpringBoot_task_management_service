@@ -15,6 +15,12 @@ public class TagRestController {
     @PostMapping("/register/{projectNo}")
     public Tag doRegister(@PathVariable("projectNo") Integer projectNo,
                           @RequestBody TagRequest tagRequest){
-        return tagService.register(projectNo, tagRequest);
+        return tagService.register(projectNo, tagRequest.getName());
+    }
+
+    @PutMapping("/{tagNo}")
+    public Integer doModify(@PathVariable("tagNo") Integer tagNo,
+                            @RequestBody TagRequest tagRequest){
+        return tagService.modify(tagNo, tagRequest.getName());
     }
 }

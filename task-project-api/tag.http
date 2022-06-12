@@ -5,3 +5,11 @@ Host: localhost:9999
 {
   "name": "과제"
 }
+###
+PUT /tag/1
+Content-Type: application/json
+Host: localhost:9999
+
+{
+  "name": "과제(수정)"
+}
