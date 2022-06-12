@@ -1,0 +1,8 @@
+POST /task/tag/register
+Content-Type: application/json
+Host: localhost:9999
+
+{
+  "taskNo": 1,
+  "tagNo": 3
+}
