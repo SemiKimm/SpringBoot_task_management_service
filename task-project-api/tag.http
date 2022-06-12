@@ -3,7 +3,7 @@ Content-Type: application/json
 Host: localhost:9999
 
 {
-  "name": "과제"
+  "name": "업무"
 }
 ###
 PUT /tag/1
@@ -15,5 +15,9 @@ Host: localhost:9999
 }
 ###
 DELETE /tag/1
+Content-Type: application/json
+Host: localhost:9999
+###
+GET /tag/list/1
 Content-Type: application/json
 Host: localhost:9999

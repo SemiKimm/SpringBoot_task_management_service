@@ -1,13 +1,15 @@
 package com.nhnacademy.springboot.taskprojectapi.service.impl;
 
+import com.nhnacademy.springboot.taskprojectapi.domain.TagDto;
 import com.nhnacademy.springboot.taskprojectapi.entity.Project;
 import com.nhnacademy.springboot.taskprojectapi.entity.Tag;
 import com.nhnacademy.springboot.taskprojectapi.repository.ProjectRepository;
 import com.nhnacademy.springboot.taskprojectapi.repository.TagRepository;
-import com.nhnacademy.springboot.taskprojectapi.request.TagRequest;
 import com.nhnacademy.springboot.taskprojectapi.service.TagService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -42,5 +44,14 @@ public class TagServiceImpl implements TagService {
         tagRepository.deleteById(tagNo);
 
         return "{\"result\":\"delete success\"}";
+    }
+
+    @Override
+    public List<TagDto> getTagDtoListBy(Integer projectNo) {
+        Project project = projectRepository
+                .findById(projectNo)
+                .orElseThrow(() -> new IllegalStateException("not exist project : " + projectNo));
+
+        return tagRepository.findAllByProject(project);
     }
 }

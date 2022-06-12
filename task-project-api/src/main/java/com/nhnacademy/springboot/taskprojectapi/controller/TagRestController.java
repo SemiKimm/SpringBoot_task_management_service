@@ -1,10 +1,13 @@
 package com.nhnacademy.springboot.taskprojectapi.controller;
 
+import com.nhnacademy.springboot.taskprojectapi.domain.TagDto;
 import com.nhnacademy.springboot.taskprojectapi.entity.Tag;
 import com.nhnacademy.springboot.taskprojectapi.request.TagRequest;
 import com.nhnacademy.springboot.taskprojectapi.service.TagService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -27,5 +30,10 @@ public class TagRestController {
     @DeleteMapping("/{tagNo}")
     public String doDelete(@PathVariable("tagNo") Integer tagNo){
         return tagService.deleteTag(tagNo);
+    }
+
+    @GetMapping("/list/{projectNo}")
+    public List<TagDto> getTagDtoList(@PathVariable("projectNo") Integer projectNo){
+        return tagService.getTagDtoListBy(projectNo);
     }
 }
