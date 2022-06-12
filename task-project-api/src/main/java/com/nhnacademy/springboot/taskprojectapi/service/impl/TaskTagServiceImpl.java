@@ -1,5 +1,6 @@
 package com.nhnacademy.springboot.taskprojectapi.service.impl;
 
+import com.nhnacademy.springboot.taskprojectapi.domain.TaskTagDto;
 import com.nhnacademy.springboot.taskprojectapi.entity.Tag;
 import com.nhnacademy.springboot.taskprojectapi.entity.Task;
 import com.nhnacademy.springboot.taskprojectapi.entity.TaskTag;
@@ -11,6 +12,8 @@ import com.nhnacademy.springboot.taskprojectapi.request.TaskTagRequest;
 import com.nhnacademy.springboot.taskprojectapi.service.TaskTagService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -43,5 +46,13 @@ public class TaskTagServiceImpl implements TaskTagService {
 
         taskTagRepository.delete(taskTag);
         return "{\"result\":\"delete success\"}";
+    }
+
+    @Override
+    public List<TaskTagDto> getTaskTagDtoListBy(Integer taskNo) {
+        Task task = taskRepository
+                .findById(taskNo)
+                .orElseThrow(() -> new IllegalStateException("not exist task : " + taskNo));
+        return taskTagRepository.findTaskTagDtoBy(task);
     }
 }

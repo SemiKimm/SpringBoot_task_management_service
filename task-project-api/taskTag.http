@@ -10,3 +10,7 @@ Host: localhost:9999
 DELETE /task/tag/1/3
 Content-Type: application/json
 Host: localhost:9999
+###
+GET /task/tag/list/1
+Content-Type: application/json
+Host: localhost:9999
