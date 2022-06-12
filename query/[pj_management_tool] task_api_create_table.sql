@@ -24,32 +24,32 @@ create table tool_project_participants(
 
 create table tool_milestones(
 	milestone_no int not null auto_increment,
-    project_no int not null,
     milestone_name varchar(30) not null,
     milestone_start_date date null,
     milestone_finish_date date null,
+    project_no int not null,
     primary key (milestone_no),
     foreign key (project_no) references tool_projects (project_no)
 );
 
 create table tool_tags(
 	tag_no int not null auto_increment,
-    project_no int not null,
     tag_name varchar(20) not null,
+	project_no int not null,
     primary key (tag_no),
     foreign key (project_no) references tool_projects (project_no)
 );
 
 create table tool_tasks(
 	task_no int not null auto_increment,
-    project_no int not null,
-    participant_account_id varchar(20) not null,
     task_create_datetime datetime not null,
     task_title varchar(100) not null,
     task_content varchar(1000) null,
+    participant_account_id varchar(20) not null,
+    project_no int not null,
     milestone_no int null,
     primary key (task_no),
-    foreign key (project_no, participant_account_id) references tool_project_participants (project_no, participant_account_id),
+    foreign key (participant_account_id, project_no) references tool_project_participants (participant_account_id, project_no),
     foreign key (milestone_no) references tool_milestones (milestone_no)
 );
 
