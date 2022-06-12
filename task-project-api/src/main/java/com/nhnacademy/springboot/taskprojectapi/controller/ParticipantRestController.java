@@ -1,10 +1,13 @@
 package com.nhnacademy.springboot.taskprojectapi.controller;
 
+import com.nhnacademy.springboot.taskprojectapi.domain.ParticipantDto;
 import com.nhnacademy.springboot.taskprojectapi.entity.Participant;
 import com.nhnacademy.springboot.taskprojectapi.request.ParticipantRegisterRequest;
 import com.nhnacademy.springboot.taskprojectapi.service.ParticipantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -20,5 +23,10 @@ public class ParticipantRestController {
     public String doDeleteMember(@PathVariable("projectNo") Integer projectNo,
                                  @PathVariable("memberId") String memberId){
         return participantService.deleteMember(projectNo, memberId);
+    }
+
+    @GetMapping("/{projectNo}")
+    public List<ParticipantDto> participantList(@PathVariable("projectNo") Integer projectNo){
+        return participantService.getParticipants(projectNo);
     }
 }

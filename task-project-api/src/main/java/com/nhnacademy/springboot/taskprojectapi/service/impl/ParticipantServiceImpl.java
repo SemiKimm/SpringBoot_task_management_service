@@ -1,5 +1,6 @@
 package com.nhnacademy.springboot.taskprojectapi.service.impl;
 
+import com.nhnacademy.springboot.taskprojectapi.domain.ParticipantDto;
 import com.nhnacademy.springboot.taskprojectapi.entity.Participant;
 import com.nhnacademy.springboot.taskprojectapi.entity.Project;
 import com.nhnacademy.springboot.taskprojectapi.entity.pk.ParticipantPk;
@@ -9,6 +10,8 @@ import com.nhnacademy.springboot.taskprojectapi.request.ParticipantRegisterReque
 import com.nhnacademy.springboot.taskprojectapi.service.ParticipantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -49,5 +52,13 @@ public class ParticipantServiceImpl implements ParticipantService {
                 .orElseThrow(() -> new IllegalStateException("not exist participant : " + memberId));
         participantRepository.delete(participant);
         return "{\"result\":\"delete success\"}";
+    }
+
+    @Override
+    public List<ParticipantDto> getParticipants(Integer projectNo) {
+        if(!projectRepository.existsById(projectNo)){
+            throw new IllegalArgumentException("not exist project : " + projectNo);
+        }
+        return participantRepository.findParticipantsBy(projectNo);
     }
 }

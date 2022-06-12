@@ -12,3 +12,9 @@ Host: localhost:9999
 DELETE /participant/2/semi
 Content-Type: application/json
 Host: localhost:9999
+
+###
+
+GET /participant/3
+Content-Type: application/json
+Host: localhost:9999
