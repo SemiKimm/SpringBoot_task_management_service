@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Data
 @Entity
 @Table(name = "tool_tags")
@@ -23,4 +22,12 @@ public class Tag {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_no", nullable = false)
     private Project project;
+
+    public static Tag create(String name, Project project){
+        Tag tag = new Tag();
+        tag.setName(name);
+        tag.setProject(project);
+
+        return tag;
+    }
 }

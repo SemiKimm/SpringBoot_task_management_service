@@ -1,0 +1,7 @@
+POST /tag/register/1
+Content-Type: application/json
+Host: localhost:9999
+
+{
+  "name": "과제"
+}
