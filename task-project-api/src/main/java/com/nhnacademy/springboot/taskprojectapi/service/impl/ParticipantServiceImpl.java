@@ -40,4 +40,14 @@ public class ParticipantServiceImpl implements ParticipantService {
 
         return participantRepository.saveAndFlush(admin);
     }
+
+    @Override
+    public String deleteMember(Integer projectNo, String memberId) {
+        ParticipantPk pk = new ParticipantPk(memberId, projectNo);
+        Participant participant = participantRepository
+                .findById(pk)
+                .orElseThrow(() -> new IllegalStateException("not exist participant : " + memberId));
+        participantRepository.delete(participant);
+        return "{\"result\":\"delete success\"}";
+    }
 }

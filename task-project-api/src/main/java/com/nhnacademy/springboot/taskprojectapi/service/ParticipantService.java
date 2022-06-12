@@ -8,4 +8,6 @@ public interface ParticipantService {
     Participant registerMember(ParticipantRegisterRequest participantRegisterRequest);
 
     Participant registerAdmin(String registrantId, Project project);
+
+    String deleteMember(Integer projectNo, String memberId);
 }
