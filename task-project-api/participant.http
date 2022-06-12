@@ -1,0 +1,8 @@
+POST /participant/register/member
+Content-Type: application/json
+Host: localhost:9999
+
+{
+  "accountId" : "semi",
+  "projectNo" : 2
+}
