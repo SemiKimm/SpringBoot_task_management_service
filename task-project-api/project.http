@@ -1,0 +1,8 @@
+POST /project/register
+Content-Type: application/json
+Host: localhost:9999
+
+{
+  "name": "첫번째 프로젝트",
+  "explanation": "프로젝트 등록 테스트를 위한 프로젝트"
+}
