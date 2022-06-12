@@ -1,6 +1,7 @@
 package com.nhnacademy.springboot.taskprojectapi.entity;
 
 import com.nhnacademy.springboot.taskprojectapi.entity.pk.ParticipantPk;
+import com.nhnacademy.springboot.taskprojectapi.enumm.Authority;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,4 +21,20 @@ public class Participant {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_no", nullable = false)
     private Project project;
+
+    public static Participant createMember(ParticipantPk participantPk){
+        Participant member = new Participant();
+        member.setPk(participantPk);
+        member.setAuthority(Authority.MEMBER.getAuthority());
+
+        return member;
+    }
+
+    public static Participant createAdmin(ParticipantPk participantPk){
+        Participant admin = new Participant();
+        admin.setPk(participantPk);
+        admin.setAuthority(Authority.ADMIN.getAuthority());
+
+        return admin;
+    }
 }
