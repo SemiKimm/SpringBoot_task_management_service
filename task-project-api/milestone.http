@@ -39,3 +39,9 @@ Host: localhost:9999
 DELETE /milestone/3
 Content-Type: application/json
 Host: localhost:9999
+
+###
+
+GET /milestone/list/1/종료
+Content-Type: application/json
+Host: localhost:9999

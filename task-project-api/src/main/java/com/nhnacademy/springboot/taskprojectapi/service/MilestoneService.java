@@ -1,7 +1,10 @@
 package com.nhnacademy.springboot.taskprojectapi.service;
 
+import com.nhnacademy.springboot.taskprojectapi.domain.MilestoneDto;
 import com.nhnacademy.springboot.taskprojectapi.entity.Milestone;
 import com.nhnacademy.springboot.taskprojectapi.request.MilestoneRequest;
+
+import java.util.List;
 
 public interface MilestoneService {
     Milestone register(Integer projectNo, MilestoneRequest milestoneRequest);
@@ -11,4 +14,6 @@ public interface MilestoneService {
     Integer modifyState(Integer milestoneNo, String state);
 
     String deleteMilestone(Integer milestoneNo);
+
+    List<MilestoneDto> getMilestoneDtoListBy(Integer projectNo, String state);
 }

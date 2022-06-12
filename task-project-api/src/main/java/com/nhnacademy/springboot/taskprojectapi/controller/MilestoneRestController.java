@@ -1,10 +1,13 @@
 package com.nhnacademy.springboot.taskprojectapi.controller;
 
+import com.nhnacademy.springboot.taskprojectapi.domain.MilestoneDto;
 import com.nhnacademy.springboot.taskprojectapi.entity.Milestone;
 import com.nhnacademy.springboot.taskprojectapi.request.MilestoneRequest;
 import com.nhnacademy.springboot.taskprojectapi.service.MilestoneService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -33,5 +36,11 @@ public class MilestoneRestController {
     @DeleteMapping("/{milestoneNo}")
     public String doDelete(@PathVariable("milestoneNo") Integer milestoneNo){
         return milestoneService.deleteMilestone(milestoneNo);
+    }
+
+    @GetMapping("/list/{projectNo}/{state}")
+    public List<MilestoneDto> getMilestoneDtoList(@PathVariable("projectNo") Integer projectNo,
+                                                  @PathVariable("state") String state){
+        return milestoneService.getMilestoneDtoListBy(projectNo, state);
     }
 }

@@ -1,5 +1,6 @@
 package com.nhnacademy.springboot.taskprojectapi.service.impl;
 
+import com.nhnacademy.springboot.taskprojectapi.domain.MilestoneDto;
 import com.nhnacademy.springboot.taskprojectapi.entity.Milestone;
 import com.nhnacademy.springboot.taskprojectapi.entity.Project;
 import com.nhnacademy.springboot.taskprojectapi.repository.MilestoneRepository;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Objects;
 
 @RequiredArgsConstructor
@@ -76,5 +78,14 @@ public class MilestoneServiceImpl implements MilestoneService {
         Integer updateTaskCount = taskRepository.deleteMilestoneBy(milestoneNo);
         milestoneRepository.deleteById(milestoneNo);
         return "{\"result\":\"delete success\", \"deletedMilestoneTaskCount\":"+updateTaskCount+"}";
+    }
+
+    @Override
+    public List<MilestoneDto> getMilestoneDtoListBy(Integer projectNo, String state) {
+        Project project = projectRepository
+                .findById(projectNo)
+                .orElseThrow(() -> new IllegalStateException("not exist project : " + projectNo));
+
+        return milestoneRepository.findAllByProjectAndState(project, state);
     }
 }
