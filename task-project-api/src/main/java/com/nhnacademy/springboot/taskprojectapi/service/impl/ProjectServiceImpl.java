@@ -2,6 +2,7 @@ package com.nhnacademy.springboot.taskprojectapi.service.impl;
 
 import com.nhnacademy.springboot.taskprojectapi.entity.Project;
 import com.nhnacademy.springboot.taskprojectapi.repository.ProjectRepository;
+import com.nhnacademy.springboot.taskprojectapi.request.ProjectModifyRequest;
 import com.nhnacademy.springboot.taskprojectapi.request.ProjectRegisterRequest;
 import com.nhnacademy.springboot.taskprojectapi.service.ProjectService;
 import lombok.RequiredArgsConstructor;
@@ -16,5 +17,16 @@ public class ProjectServiceImpl implements ProjectService {
         Project project = Project.create(projectRegisterRequest.getName(),
                 projectRegisterRequest.getExplanation());
         return projectRepository.save(project);
+    }
+
+    @Override
+    public Integer modify(Integer projectNo, ProjectModifyRequest projectModifyRequest) {
+        if(!projectRepository.existsById(projectNo)){
+            throw new IllegalArgumentException("not exist project : " + projectNo);
+        }
+        return projectRepository.updateProjectInfo(projectNo,
+                projectModifyRequest.getState(),
+                projectModifyRequest.getName(),
+                projectModifyRequest.getExplanation());
     }
 }

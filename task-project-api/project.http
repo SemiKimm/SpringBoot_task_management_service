@@ -6,3 +6,27 @@ Host: localhost:9999
   "name": "첫번째 프로젝트",
   "explanation": "프로젝트 등록 테스트를 위한 프로젝트"
 }
+
+###
+
+PUT /project/1/modify
+Content-Type: application/json
+Host: localhost:9999
+
+{
+  "state": "활성",
+  "name": "첫번째 프로젝트(수정)",
+  "explanation": "프로젝트 등록 테스트를 위한 프로젝트를 수정"
+}
+
+###
+
+PUT /project/200/modify
+Content-Type: application/json
+Host: localhost:9999
+
+{
+  "state": "활성",
+  "name": "없는 프로젝트 수정",
+  "explanation": "오류 나겠지"
+}
