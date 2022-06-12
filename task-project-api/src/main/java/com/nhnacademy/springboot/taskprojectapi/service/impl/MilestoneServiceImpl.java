@@ -4,11 +4,13 @@ import com.nhnacademy.springboot.taskprojectapi.entity.Milestone;
 import com.nhnacademy.springboot.taskprojectapi.entity.Project;
 import com.nhnacademy.springboot.taskprojectapi.repository.MilestoneRepository;
 import com.nhnacademy.springboot.taskprojectapi.repository.ProjectRepository;
+import com.nhnacademy.springboot.taskprojectapi.repository.TaskRepository;
 import com.nhnacademy.springboot.taskprojectapi.request.MilestoneRequest;
 import com.nhnacademy.springboot.taskprojectapi.service.MilestoneService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
@@ -18,6 +20,7 @@ import java.util.Objects;
 public class MilestoneServiceImpl implements MilestoneService {
     private final MilestoneRepository milestoneRepository;
     private final ProjectRepository projectRepository;
+    private final TaskRepository taskRepository;
 
     @Override
     public Milestone register(Integer projectNo, MilestoneRequest milestoneRequest) {
@@ -62,5 +65,16 @@ public class MilestoneServiceImpl implements MilestoneService {
             throw new IllegalStateException("not exist milestone : " + milestoneNo);
         }
         return milestoneRepository.updateState(milestoneNo, state);
+    }
+
+    @Transactional
+    @Override
+    public String deleteMilestone(Integer milestoneNo) {
+        if(!milestoneRepository.existsById(milestoneNo)){
+            throw new IllegalStateException("not exist milestone : " + milestoneNo);
+        }
+        Integer updateTaskCount = taskRepository.deleteMilestoneBy(milestoneNo);
+        milestoneRepository.deleteById(milestoneNo);
+        return "{\"result\":\"delete success\", \"deletedMilestoneTaskCount\":"+updateTaskCount+"}";
     }
 }

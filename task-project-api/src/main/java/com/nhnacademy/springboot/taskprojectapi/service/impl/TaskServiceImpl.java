@@ -1,9 +1,11 @@
 package com.nhnacademy.springboot.taskprojectapi.service.impl;
 
 import com.nhnacademy.springboot.taskprojectapi.domain.TaskDto;
+import com.nhnacademy.springboot.taskprojectapi.entity.Milestone;
 import com.nhnacademy.springboot.taskprojectapi.entity.Participant;
 import com.nhnacademy.springboot.taskprojectapi.entity.Task;
 import com.nhnacademy.springboot.taskprojectapi.entity.pk.ParticipantPk;
+import com.nhnacademy.springboot.taskprojectapi.repository.MilestoneRepository;
 import com.nhnacademy.springboot.taskprojectapi.repository.ParticipantRepository;
 import com.nhnacademy.springboot.taskprojectapi.repository.ProjectRepository;
 import com.nhnacademy.springboot.taskprojectapi.repository.TaskRepository;
@@ -22,6 +24,7 @@ public class TaskServiceImpl implements TaskService {
     private final TaskRepository taskRepository;
     private final ParticipantRepository participantRepository;
     private final ProjectRepository projectRepository;
+    private final MilestoneRepository milestoneRepository;
 
     @Override
     public Task register(Integer projectNo, String participantId, TaskRegisterRequest taskRegisterRequest) {
@@ -41,9 +44,13 @@ public class TaskServiceImpl implements TaskService {
         }
 
         if(Objects.nonNull(taskModifyRequest.getMilestoneNo())){
-            //return taskRepository.updateTaskWithMilestone();
-            // fixme : milestone 구현 한 담에 여기 수정하기 마일스톤 들어갈 수 있도록
-            return 0;
+            Milestone milestone = milestoneRepository
+                    .findById(taskModifyRequest.getMilestoneNo())
+                    .orElseThrow(() -> new IllegalStateException("not exist milestone"));
+            return taskRepository.updateTaskWithMilestone(taskNo,
+                    taskModifyRequest.getTitle(),
+                    taskModifyRequest.getContent(),
+                    milestone);
         }
 
         return taskRepository.updateTask(taskNo,

@@ -1,4 +1,4 @@
-POST /task/register/3/semi
+POST /task/register/1/semi
 Content-Type: application/json
 Host: localhost:9999
 
@@ -16,6 +16,18 @@ Host: localhost:9999
 {
   "title" : "업무(수정)",
   "content" : "업무 내용(수정)"
+}
+
+###
+
+PUT /task/modify/1
+Content-Type: application/json
+Host: localhost:9999
+
+{
+  "title" : "업무(수정)",
+  "content" : "업무 내용(수정) - milestone 추가",
+  "milestoneNo" : 3
 }
 
 ###

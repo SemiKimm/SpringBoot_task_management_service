@@ -9,4 +9,6 @@ public interface MilestoneService {
     Integer modify(Integer milestoneNo, MilestoneRequest milestoneRequest);
 
     Integer modifyState(Integer milestoneNo, String state);
+
+    String deleteMilestone(Integer milestoneNo);
 }

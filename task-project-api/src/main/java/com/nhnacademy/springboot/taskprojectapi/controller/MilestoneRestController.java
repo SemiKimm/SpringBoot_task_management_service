@@ -29,4 +29,9 @@ public class MilestoneRestController {
                                @PathVariable("state") String state){
         return milestoneService.modifyState(milestoneNo, state);
     }
+
+    @DeleteMapping("/{milestoneNo}")
+    public String doDelete(@PathVariable("milestoneNo") Integer milestoneNo){
+        return milestoneService.deleteMilestone(milestoneNo);
+    }
 }
