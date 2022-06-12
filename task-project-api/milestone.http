@@ -27,3 +27,9 @@ Host: localhost:9999
 {
   "name": "버전 1.0 배포(수정2)"
 }
+
+###
+
+GET /milestone/modify/1/종료
+Content-Type: application/json
+Host: localhost:9999

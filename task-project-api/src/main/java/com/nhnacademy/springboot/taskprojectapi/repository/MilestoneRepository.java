@@ -20,4 +20,10 @@ public interface MilestoneRepository extends JpaRepository<Milestone, Integer> {
                              @Param("name") String name,
                              @Param("startDate") LocalDate startDate,
                              @Param("finishDate") LocalDate finishDate);
+
+    @Transactional
+    @Modifying
+    @Query("update Milestone m set m.state = :state where m.no = :milestoneNo")
+    Integer updateState(@Param("milestoneNo") Integer milestoneNo,
+                        @Param("state") String state);
 }

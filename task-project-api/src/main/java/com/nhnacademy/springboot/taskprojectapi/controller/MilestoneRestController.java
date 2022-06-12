@@ -23,4 +23,10 @@ public class MilestoneRestController {
                             @RequestBody MilestoneRequest milestoneRequest){
         return milestoneService.modify(milestoneNo, milestoneRequest);
     }
+
+    @GetMapping("/modify/{milestoneNo}/{state}")
+    public Integer changeState(@PathVariable("milestoneNo") Integer milestoneNo,
+                               @PathVariable("state") String state){
+        return milestoneService.modifyState(milestoneNo, state);
+    }
 }

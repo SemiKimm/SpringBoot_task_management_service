@@ -7,4 +7,6 @@ public interface MilestoneService {
     Milestone register(Integer projectNo, MilestoneRequest milestoneRequest);
 
     Integer modify(Integer milestoneNo, MilestoneRequest milestoneRequest);
+
+    Integer modifyState(Integer milestoneNo, String state);
 }
