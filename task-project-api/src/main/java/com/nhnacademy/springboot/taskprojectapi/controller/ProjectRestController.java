@@ -23,4 +23,9 @@ public class ProjectRestController {
                             @RequestBody ProjectModifyRequest projectModifyRequest){
         return projectService.modify(projectNo, projectModifyRequest);
     }
+
+    @DeleteMapping("/{projectNo}")
+    public String doDelete(@PathVariable("projectNo") Integer projectNo){
+        return projectService.delete(projectNo);
+    }
 }

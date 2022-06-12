@@ -30,3 +30,9 @@ Host: localhost:9999
   "name": "없는 프로젝트 수정",
   "explanation": "오류 나겠지"
 }
+
+###
+
+DELETE /project/1
+Content-Type: application/json
+Host: localhost:9999

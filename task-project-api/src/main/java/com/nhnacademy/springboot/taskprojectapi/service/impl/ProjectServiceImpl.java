@@ -29,4 +29,14 @@ public class ProjectServiceImpl implements ProjectService {
                 projectModifyRequest.getName(),
                 projectModifyRequest.getExplanation());
     }
+
+    @Override
+    public String delete(Integer projectNo) {
+        Project project = projectRepository
+                .findById(projectNo)
+                .orElseThrow(() -> new IllegalArgumentException("not exist project : " + projectNo));
+        projectRepository.delete(project);
+
+        return "{\"result\":\"delete success\"}";
+    }
 }

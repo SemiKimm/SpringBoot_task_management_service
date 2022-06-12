@@ -8,4 +8,6 @@ public interface ProjectService {
     Project register(ProjectRegisterRequest projectRegisterRequest);
 
     Integer modify(Integer projectNo, ProjectModifyRequest projectModifyRequest);
+
+    String delete(Integer projectNo);
 }
