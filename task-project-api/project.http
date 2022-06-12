@@ -3,13 +3,13 @@ Content-Type: application/json
 Host: localhost:9999
 
 {
-  "name": "첫번째 프로젝트",
-  "explanation": "프로젝트 등록 테스트를 위한 프로젝트"
+  "name": "프로젝트 등록 확인",
+  "explanation": "프로젝트 등록 확인을 위한 프로젝트"
 }
 
 ###
 
-PUT /project/1/modify
+PUT /project/2/modify
 Content-Type: application/json
 Host: localhost:9999
 
@@ -21,18 +21,12 @@ Host: localhost:9999
 
 ###
 
-PUT /project/200/modify
+DELETE /project/2
 Content-Type: application/json
 Host: localhost:9999
 
-{
-  "state": "활성",
-  "name": "없는 프로젝트 수정",
-  "explanation": "오류 나겠지"
-}
-
 ###
 
-DELETE /project/1
+GET /project/2
 Content-Type: application/json
 Host: localhost:9999

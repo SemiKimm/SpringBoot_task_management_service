@@ -39,4 +39,11 @@ public class ProjectServiceImpl implements ProjectService {
 
         return "{\"result\":\"delete success\"}";
     }
+
+    @Override
+    public Project getProject(Integer projectNo) {
+        return projectRepository
+                .findById(projectNo)
+                .orElseThrow(() -> new IllegalArgumentException("not exist project : " + projectNo));
+    }
 }

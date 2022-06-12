@@ -28,4 +28,9 @@ public class ProjectRestController {
     public String doDelete(@PathVariable("projectNo") Integer projectNo){ //fixme : 삭제 될때 연관된 participants 있는지 확인해서 얘네도 다 삭제해줘야 하나??
         return projectService.delete(projectNo);
     }
+
+    @GetMapping("/{projectNo}")
+    public Project project(@PathVariable("projectNo") Integer projectNo){
+        return projectService.getProject(projectNo);
+    }
 }

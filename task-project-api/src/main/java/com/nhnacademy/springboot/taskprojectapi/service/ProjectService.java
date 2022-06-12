@@ -10,4 +10,6 @@ public interface ProjectService {
     Integer modify(Integer projectNo, ProjectModifyRequest projectModifyRequest);
 
     String delete(Integer projectNo);
+
+    Project getProject(Integer projectNo);
 }
