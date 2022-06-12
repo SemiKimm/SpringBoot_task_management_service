@@ -5,4 +5,6 @@ import com.nhnacademy.springboot.taskprojectapi.request.MilestoneRequest;
 
 public interface MilestoneService {
     Milestone register(Integer projectNo, MilestoneRequest milestoneRequest);
+
+    Integer modify(Integer milestoneNo, MilestoneRequest milestoneRequest);
 }

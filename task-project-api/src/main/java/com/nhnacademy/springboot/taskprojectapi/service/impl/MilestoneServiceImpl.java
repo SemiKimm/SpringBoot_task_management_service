@@ -35,4 +35,26 @@ public class MilestoneServiceImpl implements MilestoneService {
 
         return milestoneRepository.save(milestone);
     }
+
+    @Override
+    public Integer modify(Integer milestoneNo, MilestoneRequest milestoneRequest) {
+        if(!milestoneRepository.existsById(milestoneNo)){
+            throw new IllegalStateException("not exist milestone : " + milestoneNo);
+        }
+
+        if(Objects.nonNull(milestoneRequest.getStartDate()) &&
+                Objects.nonNull(milestoneRequest.getFinishDate())){
+            LocalDate startDate = LocalDate.parse(milestoneRequest.getStartDate(), DateTimeFormatter.ofPattern("yyyyMMdd"));
+            LocalDate finishDate = LocalDate.parse(milestoneRequest.getFinishDate(), DateTimeFormatter.ofPattern("yyyyMMdd"));
+
+            return milestoneRepository.update(milestoneNo,
+                    milestoneRequest.getName(),
+                    startDate,
+                    finishDate);
+        }
+        return milestoneRepository.update(milestoneNo,
+                milestoneRequest.getName(),
+                null,
+                null);
+    }
 }
