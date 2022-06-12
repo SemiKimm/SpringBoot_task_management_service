@@ -4,7 +4,7 @@ import com.nhnacademy.springboot.taskprojectapi.entity.Milestone;
 import com.nhnacademy.springboot.taskprojectapi.entity.Project;
 import com.nhnacademy.springboot.taskprojectapi.repository.MilestoneRepository;
 import com.nhnacademy.springboot.taskprojectapi.repository.ProjectRepository;
-import com.nhnacademy.springboot.taskprojectapi.request.MilestoneRegisterRequest;
+import com.nhnacademy.springboot.taskprojectapi.request.MilestoneRequest;
 import com.nhnacademy.springboot.taskprojectapi.service.MilestoneService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,17 +20,17 @@ public class MilestoneServiceImpl implements MilestoneService {
     private final ProjectRepository projectRepository;
 
     @Override
-    public Milestone register(Integer projectNo, MilestoneRegisterRequest milestoneRegisterRequest) {
+    public Milestone register(Integer projectNo, MilestoneRequest milestoneRequest) {
         Project project = projectRepository
                 .findById(projectNo)
                 .orElseThrow(() -> new IllegalStateException("not exist project : " + projectNo));
 
-        Milestone milestone = Milestone.create(milestoneRegisterRequest.getName(), project);
+        Milestone milestone = Milestone.create(milestoneRequest.getName(), project);
 
-        if(Objects.nonNull(milestoneRegisterRequest.getStartDate()) &&
-        Objects.nonNull(milestoneRegisterRequest.getFinishDate())){
-            milestone.setStartDate(LocalDate.parse(milestoneRegisterRequest.getStartDate(), DateTimeFormatter.ofPattern("yyyyMMdd")));
-            milestone.setFinishDate(LocalDate.parse(milestoneRegisterRequest.getFinishDate(), DateTimeFormatter.ofPattern("yyyyMMdd")));
+        if(Objects.nonNull(milestoneRequest.getStartDate()) &&
+        Objects.nonNull(milestoneRequest.getFinishDate())){
+            milestone.setStartDate(LocalDate.parse(milestoneRequest.getStartDate(), DateTimeFormatter.ofPattern("yyyyMMdd")));
+            milestone.setFinishDate(LocalDate.parse(milestoneRequest.getFinishDate(), DateTimeFormatter.ofPattern("yyyyMMdd")));
         }
 
         return milestoneRepository.save(milestone);

@@ -1,7 +1,7 @@
 package com.nhnacademy.springboot.taskprojectapi.controller;
 
 import com.nhnacademy.springboot.taskprojectapi.entity.Milestone;
-import com.nhnacademy.springboot.taskprojectapi.request.MilestoneRegisterRequest;
+import com.nhnacademy.springboot.taskprojectapi.request.MilestoneRequest;
 import com.nhnacademy.springboot.taskprojectapi.service.MilestoneService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +14,7 @@ public class MilestoneRestController {
 
     @PostMapping("/register/{projectNo}")
     public Milestone doRegister(@PathVariable("projectNo") Integer projectNo,
-                                @RequestBody MilestoneRegisterRequest milestoneRegisterRequest){
-        return milestoneService.register(projectNo, milestoneRegisterRequest);
+                                @RequestBody MilestoneRequest milestoneRequest){
+        return milestoneService.register(projectNo, milestoneRequest);
     }
 }
