@@ -30,4 +30,14 @@ public class ParticipantServiceImpl implements ParticipantService {
 
         return participantRepository.saveAndFlush(member);
     }
+
+    @Override
+    public Participant registerAdmin(String registrantId, Project project) {
+        ParticipantPk pk = new ParticipantPk(registrantId, project.getNo());
+
+        Participant admin = Participant.createAdmin(pk);
+        admin.setProject(project);
+
+        return participantRepository.saveAndFlush(admin);
+    }
 }

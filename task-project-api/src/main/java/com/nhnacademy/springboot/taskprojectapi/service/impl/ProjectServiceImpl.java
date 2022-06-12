@@ -1,12 +1,17 @@
 package com.nhnacademy.springboot.taskprojectapi.service.impl;
 
+import com.nhnacademy.springboot.taskprojectapi.entity.Participant;
 import com.nhnacademy.springboot.taskprojectapi.entity.Project;
+import com.nhnacademy.springboot.taskprojectapi.entity.pk.ParticipantPk;
+import com.nhnacademy.springboot.taskprojectapi.repository.ParticipantRepository;
 import com.nhnacademy.springboot.taskprojectapi.repository.ProjectRepository;
 import com.nhnacademy.springboot.taskprojectapi.request.ProjectModifyRequest;
 import com.nhnacademy.springboot.taskprojectapi.request.ProjectRegisterRequest;
 import com.nhnacademy.springboot.taskprojectapi.service.ProjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import javax.servlet.http.Part;
 
 @Service
 @RequiredArgsConstructor

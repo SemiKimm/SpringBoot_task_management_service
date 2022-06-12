@@ -1,9 +1,9 @@
-POST /project/register
+POST /project/register/semi
 Content-Type: application/json
 Host: localhost:9999
 
 {
-  "name": "프로젝트 등록 확인",
+  "name": "프로젝트 등록되면서 프로젝트 관리자 등록 확인",
   "explanation": "프로젝트 등록 확인을 위한 프로젝트"
 }
 

@@ -3,19 +3,26 @@ package com.nhnacademy.springboot.taskprojectapi.controller;
 import com.nhnacademy.springboot.taskprojectapi.entity.Project;
 import com.nhnacademy.springboot.taskprojectapi.request.ProjectModifyRequest;
 import com.nhnacademy.springboot.taskprojectapi.request.ProjectRegisterRequest;
+import com.nhnacademy.springboot.taskprojectapi.service.ParticipantService;
 import com.nhnacademy.springboot.taskprojectapi.service.ProjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import javax.transaction.Transactional;
 
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/project")
 public class ProjectRestController {
     private final ProjectService projectService;
-
-    @PostMapping("/register")
-    public Project doRegister(@RequestBody ProjectRegisterRequest projectRegisterRequest){
-        return projectService.register(projectRegisterRequest);
+    private final ParticipantService participantService;
+    @Transactional
+    @PostMapping("/register/{registrantId}")
+    public Project doRegister(@PathVariable("registrantId") String registrantId,
+                              @RequestBody ProjectRegisterRequest projectRegisterRequest){
+        Project project = projectService.register(projectRegisterRequest);
+        participantService.registerAdmin(registrantId, project);
+        return project;
     }
 
     @PutMapping("/{projectNo}/modify")
