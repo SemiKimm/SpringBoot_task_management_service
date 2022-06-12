@@ -1,9 +1,11 @@
 package com.nhnacademy.springboot.taskprojectapi.service.impl;
 
+import com.nhnacademy.springboot.taskprojectapi.domain.TaskDto;
 import com.nhnacademy.springboot.taskprojectapi.entity.Participant;
 import com.nhnacademy.springboot.taskprojectapi.entity.Task;
 import com.nhnacademy.springboot.taskprojectapi.entity.pk.ParticipantPk;
 import com.nhnacademy.springboot.taskprojectapi.repository.ParticipantRepository;
+import com.nhnacademy.springboot.taskprojectapi.repository.ProjectRepository;
 import com.nhnacademy.springboot.taskprojectapi.repository.TaskRepository;
 import com.nhnacademy.springboot.taskprojectapi.request.TaskModifyRequest;
 import com.nhnacademy.springboot.taskprojectapi.request.TaskRegisterRequest;
@@ -11,6 +13,7 @@ import com.nhnacademy.springboot.taskprojectapi.service.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 
 @RequiredArgsConstructor
@@ -18,6 +21,7 @@ import java.util.Objects;
 public class TaskServiceImpl implements TaskService {
     private final TaskRepository taskRepository;
     private final ParticipantRepository participantRepository;
+    private final ProjectRepository projectRepository;
 
     @Override
     public Task register(Integer projectNo, String participantId, TaskRegisterRequest taskRegisterRequest) {
@@ -54,5 +58,20 @@ public class TaskServiceImpl implements TaskService {
         }
         taskRepository.deleteById(taskNo);
         return "{\"result\":\"delete success\"}";
+    }
+
+    @Override
+    public Task getTaskBy(Integer taskNo) {
+        return taskRepository
+                .findById(taskNo)
+                .orElseThrow(() -> new IllegalStateException("not exist task : " + taskNo));
+    }
+
+    @Override
+    public List<TaskDto> getTaskDtoListBy(Integer projectNo) {
+        if(!projectRepository.existsById(projectNo)){
+            throw new IllegalStateException("not exist project : " + projectNo);
+        }
+        return taskRepository.findTaskDtoListBy(projectNo);
     }
 }

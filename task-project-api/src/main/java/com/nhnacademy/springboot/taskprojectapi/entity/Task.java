@@ -22,14 +22,14 @@ public class Task {
     @Column(name = "task_content", nullable = true)
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumns(value = {
             @JoinColumn(name = "participant_account_id", nullable = false),
             @JoinColumn(name = "project_no", nullable = false)
     })
     private Participant registrant;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "milestone_no", nullable = true)
     private Milestone milestone;
 

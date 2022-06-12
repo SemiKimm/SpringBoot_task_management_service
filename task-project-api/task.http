@@ -3,7 +3,7 @@ Content-Type: application/json
 Host: localhost:9999
 
 {
-  "title" : "업무",
+  "title" : "업무 제목",
   "content" : "업무 내용"
 }
 
@@ -21,5 +21,16 @@ Host: localhost:9999
 ###
 
 DELETE /task/1
+Content-Type: application/json
+Host: localhost:9999
+
+###
+
+GET /task/2
+Content-Type: application/json
+Host: localhost:9999
+
+###
+GET /task/list/3
 Content-Type: application/json
 Host: localhost:9999
