@@ -63,14 +63,13 @@ create table tool_task_tag(
 
 create table tool_comments(
 	comment_no int not null auto_increment,
-    task_no int not null,
-    participant_account_id varchar(20) not null,
+    writer_account_id varchar(20) not null,
     comment_content varchar(200) not null,
     comment_write_datetime datetime not null,
     comment_modify_datetime datetime not null,
+    task_no int not null,
     primary key (comment_no),
-    foreign key (task_no) references tool_tasks (task_no),
-    foreign key (participant_account_id) references tool_project_participants (participant_account_id)
+    foreign key (task_no) references tool_tasks (task_no)
 );
 
 show tables;
