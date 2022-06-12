@@ -7,4 +7,6 @@ public interface TagService {
     Tag register(Integer projectNo, String name);
 
     Integer modify(Integer tagNo, String name);
+
+    String deleteTag(Integer tagNo);
 }

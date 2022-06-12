@@ -13,3 +13,7 @@ Host: localhost:9999
 {
   "name": "과제(수정)"
 }
+###
+DELETE /tag/1
+Content-Type: application/json
+Host: localhost:9999

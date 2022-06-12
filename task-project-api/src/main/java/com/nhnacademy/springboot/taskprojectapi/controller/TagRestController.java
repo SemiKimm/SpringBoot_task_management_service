@@ -23,4 +23,9 @@ public class TagRestController {
                             @RequestBody TagRequest tagRequest){
         return tagService.modify(tagNo, tagRequest.getName());
     }
+
+    @DeleteMapping("/{tagNo}")
+    public String doDelete(@PathVariable("tagNo") Integer tagNo){
+        return tagService.deleteTag(tagNo);
+    }
 }

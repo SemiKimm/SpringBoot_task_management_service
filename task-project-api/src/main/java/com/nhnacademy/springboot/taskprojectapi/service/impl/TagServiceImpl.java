@@ -33,4 +33,14 @@ public class TagServiceImpl implements TagService {
         }
         return tagRepository.update(tagNo, name);
     }
+
+    @Override
+    public String deleteTag(Integer tagNo) { // fixme : task tag 에 있는것도 삭제되도록 하기
+        if(!tagRepository.existsById(tagNo)){
+            throw new IllegalStateException("not exist tag : " + tagNo);
+        }
+        tagRepository.deleteById(tagNo);
+
+        return "{\"result\":\"delete success\"}";
+    }
 }
