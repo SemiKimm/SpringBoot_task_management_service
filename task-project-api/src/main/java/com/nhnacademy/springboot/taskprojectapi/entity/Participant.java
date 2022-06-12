@@ -18,7 +18,7 @@ public class Participant {
     private String authority;
 
     @MapsId("projectNo")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "project_no", nullable = false)
     private Project project;
 
