@@ -6,3 +6,11 @@ Host: localhost:9999
   "writerId": "semi",
   "content": "semi's comment"
 }
+###
+PUT /comment/modify/1
+Content-Type: application/json
+Host: localhost:9999
+
+{
+  "content": "modify semi's comment"
+}
