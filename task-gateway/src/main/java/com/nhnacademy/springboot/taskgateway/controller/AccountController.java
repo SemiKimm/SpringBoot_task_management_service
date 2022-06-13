@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.ValidationException;
+
 @Controller
 @RequestMapping( "/account")
 @RequiredArgsConstructor
@@ -25,7 +27,7 @@ public class AccountController {
     public String doRegister(@Validated AccountRegisterRequest request,
                              BindingResult bindingResult){
         if(bindingResult.hasErrors()){
-            throw new IllegalArgumentException(); // fixme : 예외 처리 페이지 만들기
+            throw new ValidationException(); // fixme : 예외 처리 페이지 만들기
         }
         accountService.register(request);
         return "redirect:/";
