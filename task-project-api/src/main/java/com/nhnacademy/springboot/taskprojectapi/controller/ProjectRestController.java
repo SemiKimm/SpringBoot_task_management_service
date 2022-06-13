@@ -1,5 +1,6 @@
 package com.nhnacademy.springboot.taskprojectapi.controller;
 
+import com.nhnacademy.springboot.taskprojectapi.domain.ProjectDto;
 import com.nhnacademy.springboot.taskprojectapi.entity.Project;
 import com.nhnacademy.springboot.taskprojectapi.request.ProjectModifyRequest;
 import com.nhnacademy.springboot.taskprojectapi.request.ProjectRegisterRequest;
@@ -9,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -39,5 +41,11 @@ public class ProjectRestController {
     @GetMapping("/{projectNo}")
     public Project project(@PathVariable("projectNo") Integer projectNo){
         return projectService.getProject(projectNo);
+    }
+
+    @GetMapping("/list/{accountId}/{state}")
+    public List<ProjectDto> getProjectDtoList(@PathVariable("accountId") String accountId,
+                                              @PathVariable("state") String state){
+        return projectService.getProjectDtoListBy(accountId, state);
     }
 }

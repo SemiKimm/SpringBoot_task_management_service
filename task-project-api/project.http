@@ -30,3 +30,8 @@ Host: localhost:9999
 GET /project/2
 Content-Type: application/json
 Host: localhost:9999
+
+###
+GET /project/list/semi/활성
+Content-Type: application/json
+Host: localhost:9999

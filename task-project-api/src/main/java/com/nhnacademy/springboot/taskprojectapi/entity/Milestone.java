@@ -25,7 +25,7 @@ public class Milestone {
     @Column(name = "milestone_finish_date", nullable = true)
     private LocalDate finishDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "project_no", nullable = false)
     private Project project;
 
