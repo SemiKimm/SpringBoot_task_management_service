@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>마일스톤 목록</title>
+</head>
+<body>
+<h1>마일스톤 목록</h1>
+<a th:href="@{'/milestone/register/'+${projectNo}}">마일스톤 추가하기</a>
+<fieldset>
+    <legend>마일스톤 분류</legend>
+    <a th:href="@{'/milestone/list/ACTIVE/'+${projectNo}}">활성</a>
+    <a th:href="@{'/milestone/list/FINISH/'+${projectNo}}">종료</a>
+</fieldset>
+<table style="border: solid black">
+<thead>
+<tr>
+    <th style="border: solid black">마일스톤 명</th>
+    <th style="border: solid black">시작 날짜(생략 가능)</th>
+    <th style="border: solid black">종료 날짜(생략 가능)</th>
+    <th style="border: solid black">수정</th>
+    <th style="border: solid black">삭제</th>
+</tr>
+</thead>
+<tbody>
+<tr th:each="milestone:${milestones}">
+    <td th:text="${milestone.name}" style="border: solid gray"></td>
+    <td th:text="${milestone.startDate}" style="border: solid gray"></td>
+    <td th:text="${milestone.finishDate}" style="border: solid gray"></td>
+    <td style="border: solid gray"><a th:href="@{'milestone/modify'}">수정</a></td>
+    <td style="border: solid gray"><a th:href="@{'milestone/delete'}">삭제</a></td>
+</tr>
+</tbody>
+</table>
+<a th:href="@{'/project/view/'+${projectNo}}">프로젝트로 돌아가기</a>
+</body>
+</html>

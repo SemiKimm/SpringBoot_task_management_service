@@ -3,6 +3,7 @@ package com.nhnacademy.springboot.taskprojectapi.service.impl;
 import com.nhnacademy.springboot.taskprojectapi.domain.MilestoneDto;
 import com.nhnacademy.springboot.taskprojectapi.entity.Milestone;
 import com.nhnacademy.springboot.taskprojectapi.entity.Project;
+import com.nhnacademy.springboot.taskprojectapi.enumm.State;
 import com.nhnacademy.springboot.taskprojectapi.repository.MilestoneRepository;
 import com.nhnacademy.springboot.taskprojectapi.repository.ProjectRepository;
 import com.nhnacademy.springboot.taskprojectapi.repository.TaskRepository;
@@ -85,7 +86,6 @@ public class MilestoneServiceImpl implements MilestoneService {
         Project project = projectRepository
                 .findById(projectNo)
                 .orElseThrow(() -> new IllegalStateException("not exist project : " + projectNo));
-
-        return milestoneRepository.findAllByProjectAndState(project, state);
+        return milestoneRepository.findAllByProjectAndState(project, State.valueOf(state).getState());
     }
 }
