@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>프로젝트 구성원 목록</title>
+</head>
+<body>
+<h1>프로젝트 구성원 목록</h1>
+<a th:if="${#strings.equals(userAuthority,'관리자')}" th:href="@{/account/list/JOIN/{projectNo}(projectNo=${projectNo})}">구성원 추가하기</a>
+<table style="border: solid black">
+    <thead>
+        <tr>
+            <th style="border: solid black">id</th>
+            <th style="border: solid black">프로젝트 권한</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="participant:${participants}">
+            <td th:text="${participant.pk.participantId}" style="border: solid gray"></td>
+            <td th:text="${participant.authority}" style="border: solid gray"></td>
+        </tr>
+    </tbody>
+</table>
+<a th:href="@{/project/view/{projectNo}(projectNo=${projectNo})}">프로젝트로 돌아가기</a>
+</body>
+</html>

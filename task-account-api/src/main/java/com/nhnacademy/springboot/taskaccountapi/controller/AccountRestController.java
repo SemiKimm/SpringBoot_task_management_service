@@ -1,10 +1,14 @@
 package com.nhnacademy.springboot.taskaccountapi.controller;
 
+import com.nhnacademy.springboot.taskaccountapi.domain.AccountDto;
 import com.nhnacademy.springboot.taskaccountapi.domain.AccountVO;
+import com.nhnacademy.springboot.taskaccountapi.enumm.State;
 import com.nhnacademy.springboot.taskaccountapi.request.AccountRequest;
 import com.nhnacademy.springboot.taskaccountapi.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -35,5 +39,10 @@ public class AccountRestController {
     @GetMapping("/check/{id}")
     public Boolean checkIdDuplication(@PathVariable("id") String id){
         return accountService.isExists(id);
+    }
+
+    @GetMapping("/list/{state}")
+    public List<AccountDto> getAccountDtoList(@PathVariable("state") String state){
+        return accountService.getAccountDtoListBy(State.valueOf(state).getState());
     }
 }

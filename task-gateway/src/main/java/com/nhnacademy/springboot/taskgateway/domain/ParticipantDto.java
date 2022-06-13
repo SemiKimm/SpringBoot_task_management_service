@@ -5,8 +5,9 @@ import lombok.Data;
 @Data
 public class ParticipantDto {
     @Data
-    class ParticipantId{
+    public class ParticipantId{
         private String participantId;
     }
+    private ParticipantId pk;
     private String authority;
 }

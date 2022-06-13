@@ -1,5 +1,6 @@
 package com.nhnacademy.springboot.taskaccountapi.service.impl;
 
+import com.nhnacademy.springboot.taskaccountapi.domain.AccountDto;
 import com.nhnacademy.springboot.taskaccountapi.domain.AccountVO;
 import com.nhnacademy.springboot.taskaccountapi.entity.Account;
 import com.nhnacademy.springboot.taskaccountapi.entity.Authority;
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -69,6 +71,11 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Boolean isExists(String id) {
         return accountRepository.existsById(id);
+    }
+
+    @Override
+    public List<AccountDto> getAccountDtoListBy(String state) {
+        return accountRepository.findAllByState(state);
     }
 
     private boolean isDeletedAccount(String id){

@@ -1,6 +1,7 @@
 package com.nhnacademy.springboot.taskgateway.adapter.impl;
 
 import com.nhnacademy.springboot.taskgateway.adapter.AccountAdapter;
+import com.nhnacademy.springboot.taskgateway.domain.AccountDto;
 import com.nhnacademy.springboot.taskgateway.domain.AccountRegisterRequestDto;
 import com.nhnacademy.springboot.taskgateway.domain.AccountVO;
 import lombok.RequiredArgsConstructor;
@@ -55,5 +56,19 @@ public class AccountAdapterImpl implements AccountAdapter {
                 requestEntity,
                 new ParameterizedTypeReference<>() {});
         return Boolean.TRUE.equals(exchange.getBody());
+    }
+
+    @Override
+    public List<AccountDto> findAccountDtoListBy(String state) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        httpHeaders.setAccept(List.of(MediaType.APPLICATION_JSON));
+
+        HttpEntity<String> requestEntity = new HttpEntity<>(httpHeaders);
+        ResponseEntity<List<AccountDto>> exchange = restTemplate.exchange("http://localhost:9090/account/list/" + state,
+                HttpMethod.GET,
+                requestEntity,
+                new ParameterizedTypeReference<>() {});
+        return exchange.getBody();
     }
 }
