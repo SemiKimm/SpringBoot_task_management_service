@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>태스크 등록</title>
+</head>
+<body>
+<h1>태스크 등록</h1>
+<form method="post" th:action="@{'/task/register/'+${projectNo}}">
+    제목 <input type="text" name="title" placeholder="title"/><br/>
+    내용 <textarea name="content" rows="10" cols="80"></textarea><br/>
+    <input type="submit" value="등록"/>
+</form>
+</body>
+</html>

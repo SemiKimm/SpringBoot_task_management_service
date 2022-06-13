@@ -2,11 +2,13 @@ package com.nhnacademy.springboot.taskgateway.controller;
 
 import com.nhnacademy.springboot.taskgateway.domain.ParticipantProjectDto;
 import com.nhnacademy.springboot.taskgateway.domain.ProjectDto;
+import com.nhnacademy.springboot.taskgateway.domain.TaskDto;
 import com.nhnacademy.springboot.taskgateway.enumm.State;
 import com.nhnacademy.springboot.taskgateway.request.ProjectModifyRequest;
 import com.nhnacademy.springboot.taskgateway.request.ProjectRegisterRequest;
 import com.nhnacademy.springboot.taskgateway.service.ParticipantService;
 import com.nhnacademy.springboot.taskgateway.service.ProjectService;
+import com.nhnacademy.springboot.taskgateway.service.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,7 @@ import java.util.List;
 public class ProjectController {
     private final ProjectService projectService;
     private final ParticipantService participantService;
+    private final TaskService taskService;
 
     @GetMapping("/list/{state}")
     public String projectList(@PathVariable("state") String state,
@@ -57,7 +60,10 @@ public class ProjectController {
     public String projectView(@PathVariable("projectNo") Integer projectNo,
                               Model model){
         ProjectDto project = projectService.getProject(projectNo);
+        List<TaskDto> tasks = taskService.getTaskDtoList(projectNo);
         model.addAttribute("project", project);
+        model.addAttribute("tasks",tasks);
+
         return "project/projectView";
     }
 
