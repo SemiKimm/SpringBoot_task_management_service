@@ -4,7 +4,7 @@ Host: localhost:9999
 
 {
   "writerId": "semi",
-  "content": "semi's comment"
+  "content": "semi's comment3"
 }
 ###
 PUT /comment/modify/1
@@ -16,5 +16,9 @@ Host: localhost:9999
 }
 ###
 DELETE /comment/1
+Content-Type: application/json
+Host: localhost:9999
+###
+GET /comment/list/1
 Content-Type: application/json
 Host: localhost:9999

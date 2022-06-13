@@ -1,5 +1,6 @@
 package com.nhnacademy.springboot.taskprojectapi.service.impl;
 
+import com.nhnacademy.springboot.taskprojectapi.domain.CommentDto;
 import com.nhnacademy.springboot.taskprojectapi.entity.Comment;
 import com.nhnacademy.springboot.taskprojectapi.entity.Task;
 import com.nhnacademy.springboot.taskprojectapi.repository.CommentRepository;
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -48,5 +50,14 @@ public class CommentServiceImpl implements CommentService {
         }
         commentRepository.deleteById(commentNo);
         return "{\"result\":\"delete success\"}";
+    }
+
+    @Override
+    public List<CommentDto> getCommentDtoListBy(Integer taskNo) {
+        Task task = taskRepository
+                .findById(taskNo)
+                .orElseThrow(() -> new IllegalStateException("not exist task : " + taskNo));
+
+        return commentRepository.findCommentDtoBy(task);
     }
 }

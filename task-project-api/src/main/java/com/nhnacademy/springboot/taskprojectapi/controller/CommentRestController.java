@@ -1,11 +1,14 @@
 package com.nhnacademy.springboot.taskprojectapi.controller;
 
+import com.nhnacademy.springboot.taskprojectapi.domain.CommentDto;
 import com.nhnacademy.springboot.taskprojectapi.entity.Comment;
 import com.nhnacademy.springboot.taskprojectapi.request.CommentModifyRequest;
 import com.nhnacademy.springboot.taskprojectapi.request.CommentRegisterRequest;
 import com.nhnacademy.springboot.taskprojectapi.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -28,5 +31,10 @@ public class CommentRestController {
     @DeleteMapping("/{commentNo}")
     public String doDelete(@PathVariable("commentNo") Integer commentNo){
         return commentService.deleteComment(commentNo);
+    }
+
+    @GetMapping("/list/{taskNo}")
+    public List<CommentDto> getCommentDtoList(@PathVariable("taskNo") Integer taskNo){
+        return commentService.getCommentDtoListBy(taskNo);
     }
 }
