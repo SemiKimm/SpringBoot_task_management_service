@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>프로젝트 상세보기</title>
+</head>
+<body>
+<h1>프로젝트 상세화면</h1>
+<fieldset>
+    <legend>프로젝트 정보</legend>
+    <div>
+        제목 : <span th:text="${project.name}"></span> <br/>
+        상태 : <span th:text="${project.state}"></span>
+    </div>
+    <fieldset>
+        <legend>설명</legend>
+        <div stype="white-space:pre-wrap" th:utext="${project.explanation}"></div>
+    </fieldset>
+</fieldset>
+</body>
+</html>

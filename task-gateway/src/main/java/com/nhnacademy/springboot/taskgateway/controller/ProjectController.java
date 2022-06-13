@@ -1,6 +1,7 @@
 package com.nhnacademy.springboot.taskgateway.controller;
 
 import com.nhnacademy.springboot.taskgateway.domain.ParticipantProjectDto;
+import com.nhnacademy.springboot.taskgateway.domain.ProjectDto;
 import com.nhnacademy.springboot.taskgateway.enumm.State;
 import com.nhnacademy.springboot.taskgateway.request.ProjectRegisterRequest;
 import com.nhnacademy.springboot.taskgateway.service.ProjectService;
@@ -49,5 +50,13 @@ public class ProjectController {
         projectService.register(principal.getName(), projectRegisterRequest);
 
         return "redirect:/project/list/"+ State.ACTIVE.name();
+    }
+
+    @GetMapping("/view/{projectNo}")
+    public String projectView(@PathVariable("projectNo") Integer projectNo,
+                              Model model){
+        ProjectDto project = projectService.getProject(projectNo);
+        model.addAttribute("project", project);
+        return "project/projectView";
     }
 }

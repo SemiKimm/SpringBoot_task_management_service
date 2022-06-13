@@ -1,5 +1,6 @@
 package com.nhnacademy.springboot.taskprojectapi.repository;
 
+import com.nhnacademy.springboot.taskprojectapi.domain.ProjectDto;
 import com.nhnacademy.springboot.taskprojectapi.entity.Project;
 import com.nhnacademy.springboot.taskprojectapi.repository.custom.ProjectRepositoryCustom;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 public interface ProjectRepository extends JpaRepository<Project, Integer>, ProjectRepositoryCustom {
     @Transactional
@@ -17,4 +19,7 @@ public interface ProjectRepository extends JpaRepository<Project, Integer>, Proj
                               @Param("state") String state,
                               @Param("name") String name,
                               @Param("explanation") String explanation);
+
+    @Query("select p from Project p where p.no = :projectNo")
+    Optional<ProjectDto> findProjectDtoByNo(@Param("projectNo") Integer projectNo);
 }

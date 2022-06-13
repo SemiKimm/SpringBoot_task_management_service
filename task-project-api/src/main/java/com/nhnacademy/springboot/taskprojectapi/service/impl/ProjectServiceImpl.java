@@ -1,6 +1,7 @@
 package com.nhnacademy.springboot.taskprojectapi.service.impl;
 
 import com.nhnacademy.springboot.taskprojectapi.domain.ParticipantProjectDto;
+import com.nhnacademy.springboot.taskprojectapi.domain.ProjectDto;
 import com.nhnacademy.springboot.taskprojectapi.entity.Project;
 import com.nhnacademy.springboot.taskprojectapi.repository.ProjectRepository;
 import com.nhnacademy.springboot.taskprojectapi.request.ProjectModifyRequest;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -44,10 +46,9 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Project getProject(Integer projectNo) {
+    public Optional<ProjectDto> getProject(Integer projectNo) {
         return projectRepository
-                .findById(projectNo)
-                .orElseThrow(() -> new IllegalArgumentException("not exist project : " + projectNo));
+                .findProjectDtoByNo(projectNo);
     }
 
     @Override

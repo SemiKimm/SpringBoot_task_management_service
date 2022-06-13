@@ -1,6 +1,7 @@
 package com.nhnacademy.springboot.taskprojectapi.controller;
 
 import com.nhnacademy.springboot.taskprojectapi.domain.ParticipantProjectDto;
+import com.nhnacademy.springboot.taskprojectapi.domain.ProjectDto;
 import com.nhnacademy.springboot.taskprojectapi.entity.Project;
 import com.nhnacademy.springboot.taskprojectapi.request.ProjectModifyRequest;
 import com.nhnacademy.springboot.taskprojectapi.request.ProjectRegisterRequest;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
@@ -39,7 +41,7 @@ public class ProjectRestController {
     }
 
     @GetMapping("/{projectNo}")
-    public Project project(@PathVariable("projectNo") Integer projectNo){
+    public Optional<ProjectDto> project(@PathVariable("projectNo") Integer projectNo){
         return projectService.getProject(projectNo);
     }
 
