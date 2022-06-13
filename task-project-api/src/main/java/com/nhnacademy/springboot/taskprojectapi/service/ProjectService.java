@@ -1,6 +1,6 @@
 package com.nhnacademy.springboot.taskprojectapi.service;
 
-import com.nhnacademy.springboot.taskprojectapi.domain.ProjectDto;
+import com.nhnacademy.springboot.taskprojectapi.domain.ParticipantProjectDto;
 import com.nhnacademy.springboot.taskprojectapi.entity.Project;
 import com.nhnacademy.springboot.taskprojectapi.request.ProjectModifyRequest;
 import com.nhnacademy.springboot.taskprojectapi.request.ProjectRegisterRequest;
@@ -16,5 +16,5 @@ public interface ProjectService {
 
     Project getProject(Integer projectNo);
 
-    List<ProjectDto> getProjectDtoListBy(String accountId, String state);
+    List<ParticipantProjectDto> getProjectDtoListBy(String accountId, String state);
 }

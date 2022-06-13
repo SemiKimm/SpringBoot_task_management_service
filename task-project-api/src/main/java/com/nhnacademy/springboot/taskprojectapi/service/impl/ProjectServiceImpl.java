@@ -1,10 +1,7 @@
 package com.nhnacademy.springboot.taskprojectapi.service.impl;
 
-import com.nhnacademy.springboot.taskprojectapi.domain.ProjectDto;
-import com.nhnacademy.springboot.taskprojectapi.entity.Participant;
+import com.nhnacademy.springboot.taskprojectapi.domain.ParticipantProjectDto;
 import com.nhnacademy.springboot.taskprojectapi.entity.Project;
-import com.nhnacademy.springboot.taskprojectapi.entity.pk.ParticipantPk;
-import com.nhnacademy.springboot.taskprojectapi.repository.ParticipantRepository;
 import com.nhnacademy.springboot.taskprojectapi.repository.ProjectRepository;
 import com.nhnacademy.springboot.taskprojectapi.request.ProjectModifyRequest;
 import com.nhnacademy.springboot.taskprojectapi.request.ProjectRegisterRequest;
@@ -12,7 +9,6 @@ import com.nhnacademy.springboot.taskprojectapi.service.ProjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.Part;
 import java.util.List;
 
 @Service
@@ -55,7 +51,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public List<ProjectDto> getProjectDtoListBy(String accountId, String state) {
+    public List<ParticipantProjectDto> getProjectDtoListBy(String accountId, String state) {
         return projectRepository
                 .findProjectDtoList(accountId, state);
     }

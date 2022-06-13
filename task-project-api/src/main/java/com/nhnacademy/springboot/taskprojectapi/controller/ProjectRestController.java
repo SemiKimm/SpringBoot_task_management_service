@@ -1,6 +1,6 @@
 package com.nhnacademy.springboot.taskprojectapi.controller;
 
-import com.nhnacademy.springboot.taskprojectapi.domain.ProjectDto;
+import com.nhnacademy.springboot.taskprojectapi.domain.ParticipantProjectDto;
 import com.nhnacademy.springboot.taskprojectapi.entity.Project;
 import com.nhnacademy.springboot.taskprojectapi.request.ProjectModifyRequest;
 import com.nhnacademy.springboot.taskprojectapi.request.ProjectRegisterRequest;
@@ -44,8 +44,8 @@ public class ProjectRestController {
     }
 
     @GetMapping("/list/{accountId}/{state}")
-    public List<ProjectDto> getProjectDtoList(@PathVariable("accountId") String accountId,
-                                              @PathVariable("state") String state){
+    public List<ParticipantProjectDto> getProjectDtoList(@PathVariable("accountId") String accountId,
+                                                         @PathVariable("state") String state){
         return projectService.getProjectDtoListBy(accountId, state);
     }
 }

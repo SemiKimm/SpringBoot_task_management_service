@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>프로젝트 목록</title>
+</head>
+<body>
+    <a href="/">홈으로</a>
+    <table style="border: solid black">
+        <thead>
+            <tr>
+                <th style="border: solid black">no.</th>
+                <th style="border: solid black">프로젝트 이름</th>
+                <th style="border: solid black">권한</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="project : ${projects}">
+                <td th:text="${project.no}" style="border: solid gray"></td>
+                <td th:text="${project.name}" style="border: solid gray"></td>
+                <td th:text="${project.authority}" style="border: solid gray"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
