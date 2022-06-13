@@ -3,6 +3,7 @@ package com.nhnacademy.springboot.taskgateway.controller;
 import com.nhnacademy.springboot.taskgateway.domain.ParticipantProjectDto;
 import com.nhnacademy.springboot.taskgateway.domain.ProjectDto;
 import com.nhnacademy.springboot.taskgateway.enumm.State;
+import com.nhnacademy.springboot.taskgateway.request.ProjectModifyRequest;
 import com.nhnacademy.springboot.taskgateway.request.ProjectRegisterRequest;
 import com.nhnacademy.springboot.taskgateway.service.ParticipantService;
 import com.nhnacademy.springboot.taskgateway.service.ProjectService;
@@ -12,10 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.ValidationException;
 import java.security.Principal;
@@ -71,8 +69,17 @@ public class ProjectController {
             throw new AccessDeniedException("invalid authority");
         }
         ProjectDto projectDto = projectService.getProject(projectNo);
+        List<State> states = List.of(State.ACTIVE, State.INACTIVE, State.FINISH);
         model.addAttribute("project", projectDto);
+        model.addAttribute("states", states);
 
         return "project/projectModifyView";
+    }
+
+    @PostMapping("/modify/{projectNo}")
+    public String doModify(@PathVariable("projectNo") Integer projectNo,
+                           @Validated ProjectModifyRequest projectModifyRequest){
+        projectService.modify(projectNo, projectModifyRequest);
+        return "redirect:/project/view/"+projectNo;
     }
 }

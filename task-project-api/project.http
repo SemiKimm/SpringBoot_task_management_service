@@ -15,8 +15,8 @@ Host: localhost:9999
 
 {
   "state": "활성",
-  "name": "첫번째 프로젝트(수정)",
-  "explanation": "프로젝트 등록 테스트를 위한 프로젝트를 수정"
+  "name": "프로젝트(수정)",
+  "explanation": "프로젝트를 수정"
 }
 
 ###

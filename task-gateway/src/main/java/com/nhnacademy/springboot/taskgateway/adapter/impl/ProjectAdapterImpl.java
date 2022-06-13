@@ -5,6 +5,7 @@ import com.nhnacademy.springboot.taskgateway.domain.AccountRegisterRequestDto;
 import com.nhnacademy.springboot.taskgateway.domain.AccountVO;
 import com.nhnacademy.springboot.taskgateway.domain.ParticipantProjectDto;
 import com.nhnacademy.springboot.taskgateway.domain.ProjectDto;
+import com.nhnacademy.springboot.taskgateway.request.ProjectModifyRequest;
 import com.nhnacademy.springboot.taskgateway.request.ProjectRegisterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
@@ -30,6 +31,20 @@ public class ProjectAdapterImpl implements ProjectAdapter {
         ResponseEntity<AccountVO> exchange = restTemplate.exchange(requestEntity,
                 new ParameterizedTypeReference<>() {});
     }
+
+    @Override
+    public Integer modifyProject(Integer projectNo, ProjectModifyRequest projectModifyRequest) {
+        RequestEntity<ProjectModifyRequest> requestEntity = RequestEntity
+                .put("http://localhost:9999/project/"+projectNo+"/modify")
+                .accept(MediaType.APPLICATION_JSON)
+                .body(projectModifyRequest);
+
+        ResponseEntity<Integer> exchange = restTemplate.exchange(requestEntity,
+                new ParameterizedTypeReference<>() {});
+
+        return exchange.getBody();
+    }
+
 
     @Override
     public List<ParticipantProjectDto> findProjectList(String accountId, String state) {

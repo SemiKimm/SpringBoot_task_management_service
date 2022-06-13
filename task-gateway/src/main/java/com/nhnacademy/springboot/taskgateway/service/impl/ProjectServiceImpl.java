@@ -5,6 +5,7 @@ import com.nhnacademy.springboot.taskgateway.adapter.ProjectAdapter;
 import com.nhnacademy.springboot.taskgateway.domain.ParticipantProjectDto;
 import com.nhnacademy.springboot.taskgateway.domain.ProjectDto;
 import com.nhnacademy.springboot.taskgateway.exception.NotExistProjectException;
+import com.nhnacademy.springboot.taskgateway.request.ProjectModifyRequest;
 import com.nhnacademy.springboot.taskgateway.request.ProjectRegisterRequest;
 import com.nhnacademy.springboot.taskgateway.service.ProjectService;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,11 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public void register(String accountId, ProjectRegisterRequest projectRegisterRequest) {
         projectAdapter.createProject(accountId, projectRegisterRequest);
+    }
+
+    @Override
+    public void modify(Integer projectNo, ProjectModifyRequest projectModifyRequest) {
+        projectAdapter.modifyProject(projectNo, projectModifyRequest);
     }
 
     @Override
