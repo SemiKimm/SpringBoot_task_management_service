@@ -2,7 +2,6 @@ package com.nhnacademy.springboot.taskgateway.controller;
 
 import com.nhnacademy.springboot.taskgateway.domain.MilestoneDto;
 import com.nhnacademy.springboot.taskgateway.domain.TaskDetailDto;
-import com.nhnacademy.springboot.taskgateway.domain.TaskDto;
 import com.nhnacademy.springboot.taskgateway.enumm.State;
 import com.nhnacademy.springboot.taskgateway.request.TaskModifyRequest;
 import com.nhnacademy.springboot.taskgateway.request.TaskRegisterRequest;

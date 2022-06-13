@@ -16,14 +16,14 @@
         마일스톤 : <span th:text="${task.milestone.name}"></span><br/>
             기간 : <span th:text="${task.milestone.startDate}"></span> ~ <span th:text="${task.milestone.finishDate}"></span>
         </div>
+        <a th:href="@{'/taskTag/list/'+${task.no}+'/'+${projectNo}}">태그 목록</a>
     </div>
     <fieldset>
         <legend>설명</legend>
         <div style="white-space:pre-wrap" th:utext="${task.content}"></div>
     </fieldset>
-    <a th:href="@{'/task/modify/'+${task.no}+'/'+${projectNo}}">편집</a><br/>
-    <a th:href="@{'/task/delete/'+${task.no}+'/'+${projectNo}}">삭제</a><br/>
-    <a th:href="@{'/taskTag/list/'+${task.no}+'/'+${projectNo}}">태그 목록</a>
+    <a th:href="@{'/task/modify/'+${task.no}+'/'+${projectNo}}">편집</a>
+    <a th:href="@{'/task/delete/'+${task.no}+'/'+${projectNo}}">삭제</a>
 </fieldset>
 <a th:href="@{'/project/view/'+${projectNo}}">목록보기</a>
 </body>
