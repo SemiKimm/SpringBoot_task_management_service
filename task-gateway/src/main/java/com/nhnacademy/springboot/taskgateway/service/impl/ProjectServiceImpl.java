@@ -1,5 +1,6 @@
 package com.nhnacademy.springboot.taskgateway.service.impl;
 
+import com.nhnacademy.springboot.taskgateway.adapter.ParticipantAdapter;
 import com.nhnacademy.springboot.taskgateway.adapter.ProjectAdapter;
 import com.nhnacademy.springboot.taskgateway.domain.ParticipantProjectDto;
 import com.nhnacademy.springboot.taskgateway.domain.ProjectDto;
@@ -15,7 +16,6 @@ import java.util.List;
 @Service
 public class ProjectServiceImpl implements ProjectService {
     private final ProjectAdapter projectAdapter;
-
     @Override
     public void register(String accountId, ProjectRegisterRequest projectRegisterRequest) {
         projectAdapter.createProject(accountId, projectRegisterRequest);

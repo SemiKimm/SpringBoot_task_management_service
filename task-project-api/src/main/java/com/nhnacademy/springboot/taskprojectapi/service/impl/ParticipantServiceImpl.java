@@ -4,6 +4,7 @@ import com.nhnacademy.springboot.taskprojectapi.domain.ParticipantDto;
 import com.nhnacademy.springboot.taskprojectapi.entity.Participant;
 import com.nhnacademy.springboot.taskprojectapi.entity.Project;
 import com.nhnacademy.springboot.taskprojectapi.entity.pk.ParticipantPk;
+import com.nhnacademy.springboot.taskprojectapi.enumm.Authority;
 import com.nhnacademy.springboot.taskprojectapi.repository.ParticipantRepository;
 import com.nhnacademy.springboot.taskprojectapi.repository.ProjectRepository;
 import com.nhnacademy.springboot.taskprojectapi.request.ParticipantRegisterRequest;
@@ -12,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -69,5 +71,11 @@ public class ParticipantServiceImpl implements ParticipantService {
         }
         ParticipantPk pk = new ParticipantPk(accountId, projectNo);
         return participantRepository.existsById(pk);
+    }
+
+    @Override
+    public Optional<ParticipantDto> getParticipantDto(Integer projectNo, String accountId) {
+        ParticipantPk pk = new ParticipantPk(accountId, projectNo);
+        return participantRepository.findParticipantDtoBy(pk);
     }
 }

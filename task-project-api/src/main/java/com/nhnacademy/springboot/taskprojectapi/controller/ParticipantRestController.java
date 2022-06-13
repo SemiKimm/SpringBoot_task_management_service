@@ -7,7 +7,9 @@ import com.nhnacademy.springboot.taskprojectapi.service.ParticipantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
@@ -34,5 +36,11 @@ public class ParticipantRestController {
     public Boolean checkDuplication(@PathVariable("projectNo") Integer projectNo,
                                     @PathVariable("accountId") String accountId){
         return participantService.exists(projectNo, accountId);
+    }
+
+    @GetMapping("/{projectNo}/{accountId}")
+    public Optional<ParticipantDto> getParticipantDto(@PathVariable("projectNo") Integer projectNo,
+                                                      @PathVariable("accountId") String accountId){
+        return participantService.getParticipantDto(projectNo, accountId);
     }
 }

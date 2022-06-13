@@ -16,6 +16,7 @@
         <legend>설명</legend>
         <div stype="white-space:pre-wrap" th:utext="${project.explanation}"></div>
     </fieldset>
+    <a th:href="@{/project/modify/{projectNo}(projectNo=${project.no})}">편집</a>
 </fieldset>
 </body>
 </html>

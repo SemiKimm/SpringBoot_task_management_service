@@ -8,8 +8,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ParticipantRepository extends JpaRepository<Participant, ParticipantPk> {
     @Query("select p from Participant p where p.pk.projectNo = :projectNo")
     List<ParticipantDto> findParticipantsBy(@Param("projectNo") Integer projectNo);
+
+    @Query("select p from Participant p where p.pk = :pk")
+    Optional<ParticipantDto> findParticipantDtoBy(@Param("pk") ParticipantPk pk);
 }

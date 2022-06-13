@@ -6,6 +6,7 @@ import com.nhnacademy.springboot.taskprojectapi.entity.Project;
 import com.nhnacademy.springboot.taskprojectapi.request.ParticipantRegisterRequest;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ParticipantService {
     Participant registerMember(ParticipantRegisterRequest participantRegisterRequest);
@@ -17,4 +18,6 @@ public interface ParticipantService {
     List<ParticipantDto> getParticipants(Integer projectNo);
 
     Boolean exists(Integer projectNo, String accountId);
+
+    Optional<ParticipantDto> getParticipantDto(Integer projectNo, String accountId);
 }
