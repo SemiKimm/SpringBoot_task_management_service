@@ -40,4 +40,13 @@ public class CommentServiceImpl implements CommentService {
                 commentModifyRequest.getContent(),
                 LocalDateTime.now());
     }
+
+    @Override
+    public String deleteComment(Integer commentNo) {
+        if(!commentRepository.existsById(commentNo)){
+            throw new IllegalStateException("not exist comment : " + commentNo);
+        }
+        commentRepository.deleteById(commentNo);
+        return "{\"result\":\"delete success\"}";
+    }
 }

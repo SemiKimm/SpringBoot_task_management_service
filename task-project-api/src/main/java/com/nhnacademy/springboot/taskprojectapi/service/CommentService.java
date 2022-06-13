@@ -8,4 +8,6 @@ public interface CommentService {
     Comment register(Integer taskNo, CommentRegisterRequest commentRegisterRequest);
 
     Integer modify(Integer commentNo, CommentModifyRequest commentModifyRequest);
+
+    String deleteComment(Integer commentNo);
 }

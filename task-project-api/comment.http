@@ -14,3 +14,7 @@ Host: localhost:9999
 {
   "content": "modify semi's comment"
 }
+###
+DELETE /comment/1
+Content-Type: application/json
+Host: localhost:9999

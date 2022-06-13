@@ -24,4 +24,9 @@ public class CommentRestController {
                             @RequestBody CommentModifyRequest commentModifyRequest){
         return commentService.modify(commentNo, commentModifyRequest);
     }
+
+    @DeleteMapping("/{commentNo}")
+    public String doDelete(@PathVariable("commentNo") Integer commentNo){
+        return commentService.deleteComment(commentNo);
+    }
 }
