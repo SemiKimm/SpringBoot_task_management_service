@@ -32,8 +32,8 @@
         <a th:if="${#strings.equals(milestone.state,'활성')}" th:href="@{'/milestone/modify/'+${milestone.no}+'/FINISH/'+${projectNo}}">종료</a>
         <a th:unless="${#strings.equals(milestone.state,'활성')}" th:href="@{'/milestone/modify/'+${milestone.no}+'/ACTIVE/'+${projectNo}}">복구</a>
     </td>
-    <td style="border: solid gray"><a th:href="@{'/milestone/modify'}">수정</a></td>
-    <td style="border: solid gray"><a th:href="@{'/milestone/delete'}">삭제</a></td>
+    <td style="border: solid gray"><a th:href="@{'/milestone/modify/'+${milestone.no}+'/'+${projectNo}}">수정</a></td>
+    <td style="border: solid gray"><a th:href="@{'/milestone/delete/'+${milestone.no}+'/'+${projectNo}}">삭제</a></td>
 </tr>
 </tbody>
 </table>

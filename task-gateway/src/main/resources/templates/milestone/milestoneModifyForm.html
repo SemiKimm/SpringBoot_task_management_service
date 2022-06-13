@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>마일스톤 수정</title>
+</head>
+<body>
+<h1>마일스톤 수정</h1>
+<form method="post" th:action="@{'/milestone/modify/'+${milestone.no}+'/'+${projectNo}}">
+    마일스톤 이름 <input type="text" name="name" th:value="${milestone.name}"/><br/>
+    <fieldset>
+        <legend>기간(생략 가능)</legend>
+        시작 날짜 <input type="date" name="startDate" th:value="${milestone.startDate}"/>
+        종료 날짜 <input type="date" name="finishDate" th:value="${milestone.finishDate}"/>
+    </fieldset>
+    <input type="submit" value="수정"/>
+</form>
+<a th:href="@{'/milestone/list/ACTIVE/'+${projectNo}}">마일스톤 목록으로 돌아가기</a>
+</body>
+</html>

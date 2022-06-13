@@ -58,4 +58,26 @@ public class MilestoneController {
         milestoneService.modifyState(milestoneNo, state);
         return "redirect:/milestone/list/ACTIVE/" + projectNo;
     }
+
+    @GetMapping("/modify/{milestoneNo}/{projectNo}")
+    public String modify(@PathVariable("milestoneNo") Integer milestoneNo,
+                         @PathVariable("projectNo") Integer projectNo,
+                         Model model){
+        MilestoneDto milestone = milestoneService.getMilestoneDto(milestoneNo);
+        model.addAttribute("milestone", milestone);
+        model.addAttribute("projectNo", projectNo);
+        return "milestone/milestoneModifyForm";
+    }
+
+    @PostMapping("/modify/{milestoneNo}/{projectNo}")
+    public String doModify(@PathVariable("milestoneNo") Integer milestoneNo,
+                           @PathVariable("projectNo") Integer projectNo,
+                           @Validated MilestoneRequest milestoneRequest,
+                           BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            throw new ValidationException("milestone");
+        }
+        milestoneService.modify(milestoneNo, milestoneRequest);
+        return "redirect:/milestone/list/ACTIVE/" + projectNo;
+    }
 }

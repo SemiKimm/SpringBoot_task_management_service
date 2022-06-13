@@ -39,7 +39,7 @@ public class MilestoneAdapterImpl implements MilestoneAdapter {
                 .accept(MediaType.APPLICATION_JSON)
                 .body(milestoneRequest);
 
-        ResponseEntity<AccountVO> exchange = restTemplate.exchange(requestEntity,
+        restTemplate.exchange(requestEntity,
                 new ParameterizedTypeReference<>() {});
     }
 
@@ -66,6 +66,18 @@ public class MilestoneAdapterImpl implements MilestoneAdapter {
         ResponseEntity<Optional<MilestoneDto>> exchange = restTemplate.exchange("http://localhost:9999/milestone/" + milestoneNo,
                 HttpMethod.GET,
                 requestEntity,
+                new ParameterizedTypeReference<>() {});
+        return exchange.getBody();
+    }
+
+    @Override
+    public Integer update(Integer milestoneNo, MilestoneRequest milestoneRequest) {
+        RequestEntity<MilestoneRequest> requestEntity = RequestEntity
+                .put("http://localhost:9999/milestone/modify/" + milestoneNo)
+                .accept(MediaType.APPLICATION_JSON)
+                .body(milestoneRequest);
+
+        ResponseEntity<Integer> exchange = restTemplate.exchange(requestEntity,
                 new ParameterizedTypeReference<>() {});
         return exchange.getBody();
     }

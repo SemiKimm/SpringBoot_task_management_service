@@ -32,13 +32,7 @@ public class MilestoneServiceImpl implements MilestoneService {
         if(projectAdapter.findProject(projectNo).isEmpty()){
             throw new NotExistProjectException();
         }
-        if(milestoneRequest.getStartDate().isBlank()){
-            milestoneRequest.setStartDate(null);
-            milestoneRequest.setFinishDate(null);
-        }else{
-            milestoneRequest.setStartDate(LocalDate.parse(milestoneRequest.getStartDate()).format(DateTimeFormatter.ofPattern("yyyyMMdd")));
-            milestoneRequest.setFinishDate(LocalDate.parse(milestoneRequest.getFinishDate()).format(DateTimeFormatter.ofPattern("yyyyMMdd")));
-        }
+        parsing(milestoneRequest);
         milestoneAdapter.create(projectNo, milestoneRequest);
     }
 
@@ -48,5 +42,33 @@ public class MilestoneServiceImpl implements MilestoneService {
             throw new NotFoundException("milestone");
         }
         milestoneAdapter.changeState(milestoneNo, state);
+    }
+
+    @Override
+    public MilestoneDto getMilestoneDto(Integer milestoneNo) {
+        return milestoneAdapter.findMileStoneDto(milestoneNo).orElseThrow(() -> new NotFoundException("milestone"));
+    }
+
+    @Override
+    public void modify(Integer milestoneNo, MilestoneRequest milestoneRequest) {
+        if(milestoneAdapter.findMileStoneDto(milestoneNo).isEmpty()){
+            throw new NotFoundException("milestone");
+        }
+        parsing(milestoneRequest);
+        milestoneAdapter.update(milestoneNo, milestoneRequest);
+    }
+
+    private void parsing(MilestoneRequest milestoneRequest) {
+        if(checkBlankDate(milestoneRequest)){
+            milestoneRequest.setStartDate(null);
+            milestoneRequest.setFinishDate(null);
+        }else{
+            milestoneRequest.setStartDate(LocalDate.parse(milestoneRequest.getStartDate()).format(DateTimeFormatter.ofPattern("yyyyMMdd")));
+            milestoneRequest.setFinishDate(LocalDate.parse(milestoneRequest.getFinishDate()).format(DateTimeFormatter.ofPattern("yyyyMMdd")));
+        }
+    }
+
+    private boolean checkBlankDate(MilestoneRequest milestoneRequest){
+        return milestoneRequest.getStartDate().isBlank() || milestoneRequest.getFinishDate().isBlank();
     }
 }

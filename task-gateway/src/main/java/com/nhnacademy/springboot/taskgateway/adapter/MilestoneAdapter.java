@@ -14,4 +14,6 @@ public interface MilestoneAdapter {
     void changeState(Integer milestoneNo, String state);
 
     Optional<MilestoneDto> findMileStoneDto(Integer milestoneNo);
+
+    Integer update(Integer milestoneNo, MilestoneRequest milestoneRequest);
 }
