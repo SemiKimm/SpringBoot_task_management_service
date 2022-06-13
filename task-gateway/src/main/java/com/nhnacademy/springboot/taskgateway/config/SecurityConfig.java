@@ -23,6 +23,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/account/list/**").authenticated()
+                .antMatchers("/milestone/**").authenticated()
+                .antMatchers("/participant/**").authenticated()
+                .antMatchers("/project/**").authenticated()
+                .antMatchers("/tag/**").authenticated()
+                .antMatchers("/task/**").authenticated()
                 .antMatchers("/signIn").anonymous()
                 .antMatchers("/account/register").anonymous()
                 .anyRequest().permitAll()
