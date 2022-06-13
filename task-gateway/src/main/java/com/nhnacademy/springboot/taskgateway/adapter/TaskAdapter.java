@@ -2,6 +2,7 @@ package com.nhnacademy.springboot.taskgateway.adapter;
 
 import com.nhnacademy.springboot.taskgateway.domain.TaskDetailDto;
 import com.nhnacademy.springboot.taskgateway.domain.TaskDto;
+import com.nhnacademy.springboot.taskgateway.request.TaskModifyRequest;
 import com.nhnacademy.springboot.taskgateway.request.TaskRegisterRequest;
 
 import java.util.List;
@@ -13,4 +14,6 @@ public interface TaskAdapter {
     void create(Integer projectNo, String accountId, TaskRegisterRequest taskRegisterRequest);
 
     Optional<TaskDetailDto> findTaskDetailDto(Integer taskNo);
+
+    void updateBy(Integer taskNo, TaskModifyRequest taskModifyRequest);
 }

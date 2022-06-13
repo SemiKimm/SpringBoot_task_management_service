@@ -32,7 +32,7 @@ public class TaskRestController {
     }
 
     @DeleteMapping("{taskNo}")
-    public String doDelete(@PathVariable("taskNo") Integer taskNo){ // fixme : 얘도 project 처럼 삭제될때 연관된 댓글들도 삭제 되야 되나..?
+    public String doDelete(@PathVariable("taskNo") Integer taskNo){
         return taskService.deleteTask(taskNo);
     }
 

@@ -5,6 +5,7 @@ import com.nhnacademy.springboot.taskgateway.adapter.ProjectAdapter;
 import com.nhnacademy.springboot.taskgateway.adapter.TaskAdapter;
 import com.nhnacademy.springboot.taskgateway.domain.TaskDetailDto;
 import com.nhnacademy.springboot.taskgateway.domain.TaskDto;
+import com.nhnacademy.springboot.taskgateway.request.TaskModifyRequest;
 import com.nhnacademy.springboot.taskgateway.request.TaskRegisterRequest;
 import com.nhnacademy.springboot.taskgateway.service.TaskService;
 import lombok.RequiredArgsConstructor;
@@ -40,5 +41,13 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public TaskDetailDto getTaskDetailDto(Integer taskNo) {
         return taskAdapter.findTaskDetailDto(taskNo).orElseThrow(() -> new NotFoundException("task"));
+    }
+
+    @Override
+    public void modify(Integer taskNo, TaskModifyRequest taskModifyRequest, String userId) {
+        if(!getTaskDetailDto(taskNo).getRegistrant().getPk().getParticipantId().equals(userId)){
+            throw new AccessDeniedException("modify task");
+        }
+        taskAdapter.updateBy(taskNo, taskModifyRequest);
     }
 }

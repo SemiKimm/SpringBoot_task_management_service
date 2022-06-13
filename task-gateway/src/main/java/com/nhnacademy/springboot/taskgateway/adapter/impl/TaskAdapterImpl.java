@@ -5,6 +5,7 @@ import com.nhnacademy.springboot.taskgateway.domain.AccountVO;
 import com.nhnacademy.springboot.taskgateway.domain.TaskDetailDto;
 import com.nhnacademy.springboot.taskgateway.domain.TaskDto;
 import com.nhnacademy.springboot.taskgateway.request.ProjectRegisterRequest;
+import com.nhnacademy.springboot.taskgateway.request.TaskModifyRequest;
 import com.nhnacademy.springboot.taskgateway.request.TaskRegisterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
@@ -57,5 +58,16 @@ public class TaskAdapterImpl implements TaskAdapter {
                 requestEntity,
                 new ParameterizedTypeReference<>() {});
         return exchange.getBody();
+    }
+
+    @Override
+    public void updateBy(Integer taskNo, TaskModifyRequest taskModifyRequest) {
+        RequestEntity<TaskModifyRequest> requestEntity = RequestEntity
+                .put("http://localhost:9999/task/modify/" + taskNo)
+                .accept(MediaType.APPLICATION_JSON)
+                .body(taskModifyRequest);
+
+        restTemplate.exchange(requestEntity,
+                new ParameterizedTypeReference<>() {});
     }
 }
