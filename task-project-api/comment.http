@@ -1,0 +1,8 @@
+POST /comment/register/1
+Content-Type: application/json
+Host: localhost:9999
+
+{
+  "writerId": "semi",
+  "content": "semi's comment"
+}

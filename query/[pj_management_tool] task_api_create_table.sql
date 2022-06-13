@@ -67,7 +67,7 @@ create table tool_comments(
     comment_writer_account_id varchar(20) not null,
     comment_content varchar(200) not null,
     comment_write_datetime datetime not null,
-    comment_modify_datetime datetime not null,
+    comment_modify_datetime datetime null,
     task_no int not null,
     primary key (comment_no),
     foreign key (task_no) references tool_tasks (task_no)
