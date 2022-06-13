@@ -1,5 +1,6 @@
 package com.nhnacademy.springboot.taskprojectapi.repository;
 
+import com.nhnacademy.springboot.taskprojectapi.domain.TaskDetailDto;
 import com.nhnacademy.springboot.taskprojectapi.domain.TaskDto;
 import com.nhnacademy.springboot.taskprojectapi.entity.Milestone;
 import com.nhnacademy.springboot.taskprojectapi.entity.Task;
@@ -10,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 public interface TaskRepository extends JpaRepository<Task, Integer> {
     @Transactional
@@ -34,4 +36,7 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
     @Modifying
     @Query("update Task t set t.milestone = null where t.milestone.no = :milestoneNo")
     Integer deleteMilestoneBy(@Param("milestoneNo") Integer milestoneNo);
+
+    @Query("select t from Task t where t.no = :taskNo")
+    Optional<TaskDetailDto> findTaskDetailDtoBy(@Param("taskNo") Integer taskNo);
 }

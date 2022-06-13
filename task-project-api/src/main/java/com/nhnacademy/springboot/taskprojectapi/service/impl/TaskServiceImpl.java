@@ -1,5 +1,6 @@
 package com.nhnacademy.springboot.taskprojectapi.service.impl;
 
+import com.nhnacademy.springboot.taskprojectapi.domain.TaskDetailDto;
 import com.nhnacademy.springboot.taskprojectapi.domain.TaskDto;
 import com.nhnacademy.springboot.taskprojectapi.entity.Milestone;
 import com.nhnacademy.springboot.taskprojectapi.entity.Participant;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -68,10 +70,9 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Task getTaskBy(Integer taskNo) {
+    public Optional<TaskDetailDto> getTaskBy(Integer taskNo) {
         return taskRepository
-                .findById(taskNo)
-                .orElseThrow(() -> new IllegalStateException("not exist task : " + taskNo));
+                .findTaskDetailDtoBy(taskNo);
     }
 
     @Override

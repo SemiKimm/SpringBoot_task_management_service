@@ -14,7 +14,7 @@
     </div>
     <fieldset>
         <legend>설명</legend>
-        <div stype="white-space:pre-wrap" th:utext="${project.explanation}"></div>
+        <div style="white-space:pre-wrap" th:utext="${project.explanation}"></div>
     </fieldset>
     <a th:href="@{/project/modify/{projectNo}(projectNo=${project.no})}">편집</a>
     <a th:href="@{/participant/list/{projectNo}(projectNo=${project.no})}">프로젝트 구성원 목록</a>
@@ -36,7 +36,7 @@
         <tr th:each="task : ${tasks}">
             <td th:text="${task.no}" style="border: solid gray"></td>
             <td style="border: solid gray">
-                <a th:href="@{'/task/view/'+${task.no}}" th:text="${task.title}"/>
+                <a th:href="@{'/task/view/'+${task.no}+'/'+${project.no}}" th:text="${task.title}"/>
             </td>
             <td th:text="${task.registrant.pk.participantId}" style="border: solid gray"></td>
         </tr>

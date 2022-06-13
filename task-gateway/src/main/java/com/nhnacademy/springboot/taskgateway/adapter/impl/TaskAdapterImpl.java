@@ -2,6 +2,7 @@ package com.nhnacademy.springboot.taskgateway.adapter.impl;
 
 import com.nhnacademy.springboot.taskgateway.adapter.TaskAdapter;
 import com.nhnacademy.springboot.taskgateway.domain.AccountVO;
+import com.nhnacademy.springboot.taskgateway.domain.TaskDetailDto;
 import com.nhnacademy.springboot.taskgateway.domain.TaskDto;
 import com.nhnacademy.springboot.taskgateway.request.ProjectRegisterRequest;
 import com.nhnacademy.springboot.taskgateway.request.TaskRegisterRequest;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Component
@@ -41,5 +43,19 @@ public class TaskAdapterImpl implements TaskAdapter {
 
         restTemplate.exchange(requestEntity,
                 new ParameterizedTypeReference<>() {});
+    }
+
+    @Override
+    public Optional<TaskDetailDto> findTaskDetailDto(Integer taskNo) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        httpHeaders.setAccept(List.of(MediaType.APPLICATION_JSON));
+
+        HttpEntity<String> requestEntity = new HttpEntity<>(httpHeaders);
+        ResponseEntity<Optional<TaskDetailDto>> exchange = restTemplate.exchange("http://localhost:9999/task/"+taskNo,
+                HttpMethod.GET,
+                requestEntity,
+                new ParameterizedTypeReference<>() {});
+        return exchange.getBody();
     }
 }

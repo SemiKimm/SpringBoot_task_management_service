@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>태스크 상세보기</title>
+</head>
+<body>
+<h1>태스크 상세화면</h1>
+<fieldset>
+    <legend>태스크 정보</legend>
+    <div>
+        제목 : <span th:text="${task.title}"></span> <br/>
+        등록일시 : <span th:text="${task.createDateTime}"></span><br/>
+        등록자 : <span th:text="${task.registrant.pk.participantId}"></span><br/>
+        <div th:if="${task.milestone}!=null">
+        마일스톤 : <span th:text="${task.milestone.name}"></span>
+        </div>
+    </div>
+    <fieldset>
+        <legend>설명</legend>
+        <div style="white-space:pre-wrap" th:utext="${task.content}"></div>
+    </fieldset>
+    <a th:href="@{'/task/modify/'+${task.no}}">편집</a>
+    <a th:href="@{'/taskTag/list/'+${task.no}}">태그 목록</a>
+</fieldset>
+<a th:href="@{'/project/view/'+${projectNo}}">목록보기</a>
+</body>
+</html>

@@ -3,6 +3,7 @@ package com.nhnacademy.springboot.taskgateway.service.impl;
 import com.nhnacademy.springboot.taskgateway.adapter.ParticipantAdapter;
 import com.nhnacademy.springboot.taskgateway.adapter.ProjectAdapter;
 import com.nhnacademy.springboot.taskgateway.adapter.TaskAdapter;
+import com.nhnacademy.springboot.taskgateway.domain.TaskDetailDto;
 import com.nhnacademy.springboot.taskgateway.domain.TaskDto;
 import com.nhnacademy.springboot.taskgateway.request.TaskRegisterRequest;
 import com.nhnacademy.springboot.taskgateway.service.TaskService;
@@ -34,5 +35,10 @@ public class TaskServiceImpl implements TaskService {
             throw new AccessDeniedException("invalid access : " + accountId);
         }
         taskAdapter.create(projectNo, accountId, taskRegisterRequest);
+    }
+
+    @Override
+    public TaskDetailDto getTaskDetailDto(Integer taskNo) {
+        return taskAdapter.findTaskDetailDto(taskNo).orElseThrow(() -> new NotFoundException("task"));
     }
 }

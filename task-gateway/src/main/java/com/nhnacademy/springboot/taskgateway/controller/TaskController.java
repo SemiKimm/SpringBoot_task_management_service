@@ -1,5 +1,7 @@
 package com.nhnacademy.springboot.taskgateway.controller;
 
+import com.nhnacademy.springboot.taskgateway.domain.TaskDetailDto;
+import com.nhnacademy.springboot.taskgateway.domain.TaskDto;
 import com.nhnacademy.springboot.taskgateway.request.TaskRegisterRequest;
 import com.nhnacademy.springboot.taskgateway.service.TaskService;
 import lombok.RequiredArgsConstructor;
@@ -39,5 +41,16 @@ public class TaskController {
         taskService.register(projectNo, principal.getName(), taskRegisterRequest);
 
         return "redirect:/project/view/"+projectNo;
+    }
+
+    @GetMapping("/view/{taskNo}/{projectNo}")
+    public String taskView(@PathVariable("taskNo") Integer taskNo,
+                           @PathVariable("projectNo") Integer projectNo,
+                           Model model){
+        TaskDetailDto task = taskService.getTaskDetailDto(taskNo);
+
+        model.addAttribute("task", task);
+        model.addAttribute("projectNo", projectNo);
+        return "task/taskView";
     }
 }
