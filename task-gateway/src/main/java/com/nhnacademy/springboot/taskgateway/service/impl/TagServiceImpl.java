@@ -42,4 +42,12 @@ public class TagServiceImpl implements TagService {
         }
         tagAdapter.update(tagNo, tagRequest);
     }
+
+    @Override
+    public void delete(Integer tagNo) {
+        if(tagAdapter.findTagDto(tagNo).isEmpty()){
+            throw new NotFoundException("tag");
+        }
+        tagAdapter.deleteByNo(tagNo);
+    }
 }

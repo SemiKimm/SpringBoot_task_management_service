@@ -13,4 +13,6 @@ public interface TagService {
     TagDto getTagDto(Integer tagNo);
 
     void modify(Integer tagNo, TagRequest tagRequest);
+
+    void delete(Integer tagNo);
 }

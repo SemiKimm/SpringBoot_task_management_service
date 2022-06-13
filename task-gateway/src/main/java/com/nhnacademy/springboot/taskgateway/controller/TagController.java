@@ -68,4 +68,11 @@ public class TagController {
         tagService.modify(tagNo, tagRequest);
         return "redirect:/tag/list/"+projectNo;
     }
+
+    @GetMapping("/delete/{tagNo}/{projectNo}")
+    public String doDelete(@PathVariable("tagNo") Integer tagNo,
+                           @PathVariable("projectNo") Integer projectNo){
+        tagService.delete(tagNo);
+        return "redirect:/tag/list/"+projectNo;
+    }
 }

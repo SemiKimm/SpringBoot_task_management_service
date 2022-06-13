@@ -14,4 +14,6 @@ public interface TagAdapter {
     Optional<TagDto> findTagDto(Integer tagNo);
 
     Integer update(Integer tagNo, TagRequest tagRequest);
+
+    String deleteByNo(Integer tagNo);
 }
