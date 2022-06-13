@@ -58,6 +58,13 @@ public class CommentServiceImpl implements CommentService {
                 .findById(taskNo)
                 .orElseThrow(() -> new IllegalStateException("not exist task : " + taskNo));
 
-        return commentRepository.findCommentDtoBy(task);
+        return commentRepository.findCommentDtoListBy(task);
+    }
+
+    @Override
+    public CommentDto getCommentDtoBy(Integer commentNo) {
+        return commentRepository
+                .findCommentDtoBy(commentNo)
+                .orElseThrow(() -> new IllegalStateException("not exist comment : " + commentNo));
     }
 }

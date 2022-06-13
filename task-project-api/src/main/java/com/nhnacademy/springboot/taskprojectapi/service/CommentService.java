@@ -15,4 +15,6 @@ public interface CommentService {
     String deleteComment(Integer commentNo);
 
     List<CommentDto> getCommentDtoListBy(Integer taskNo);
+
+    CommentDto getCommentDtoBy(Integer commentNo);
 }

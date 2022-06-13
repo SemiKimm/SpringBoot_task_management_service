@@ -37,4 +37,9 @@ public class CommentRestController {
     public List<CommentDto> getCommentDtoList(@PathVariable("taskNo") Integer taskNo){
         return commentService.getCommentDtoListBy(taskNo);
     }
+
+    @GetMapping("/{commentNo}")
+    public CommentDto getCommentDto(@PathVariable("commentNo") Integer commentNo){
+        return commentService.getCommentDtoBy(commentNo);
+    }
 }

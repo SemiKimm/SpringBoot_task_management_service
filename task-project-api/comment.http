@@ -22,3 +22,7 @@ Host: localhost:9999
 GET /comment/list/1
 Content-Type: application/json
 Host: localhost:9999
+###
+GET /comment/2
+Content-Type: application/json
+Host: localhost:9999
