@@ -4,7 +4,6 @@ import com.nhnacademy.springboot.taskgateway.adapter.ParticipantAdapter;
 import com.nhnacademy.springboot.taskgateway.domain.AccountVO;
 import com.nhnacademy.springboot.taskgateway.domain.ParticipantDto;
 import com.nhnacademy.springboot.taskgateway.request.ParticipantRegisterRequest;
-import com.nhnacademy.springboot.taskgateway.request.ProjectRegisterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
