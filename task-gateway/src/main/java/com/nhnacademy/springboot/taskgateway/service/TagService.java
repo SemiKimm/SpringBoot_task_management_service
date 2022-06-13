@@ -9,4 +9,8 @@ public interface TagService {
     List<TagDto> getTagDtoList(Integer projectNo);
 
     void register(Integer projectNo, TagRequest tagRequest);
+
+    TagDto getTagDto(Integer tagNo);
+
+    void modify(Integer tagNo, TagRequest tagRequest);
 }

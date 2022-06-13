@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -56,5 +57,10 @@ public class TagServiceImpl implements TagService {
                 .orElseThrow(() -> new IllegalStateException("not exist project : " + projectNo));
 
         return tagRepository.findAllByProject(project);
+    }
+
+    @Override
+    public Optional<TagDto> getTagDto(Integer tagNo) {
+        return tagRepository.findTagDtoBy(tagNo);
     }
 }

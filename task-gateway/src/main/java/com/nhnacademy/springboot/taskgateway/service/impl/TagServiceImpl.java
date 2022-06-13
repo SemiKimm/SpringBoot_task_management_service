@@ -29,4 +29,17 @@ public class TagServiceImpl implements TagService {
         }
         tagAdapter.create(projectNo, tagRequest);
     }
+
+    @Override
+    public TagDto getTagDto(Integer tagNo) {
+        return tagAdapter.findTagDto(tagNo).orElseThrow(() -> new NotFoundException("tag"));
+    }
+
+    @Override
+    public void modify(Integer tagNo, TagRequest tagRequest) {
+        if(tagAdapter.findTagDto(tagNo).isEmpty()){
+            throw new NotFoundException("tag");
+        }
+        tagAdapter.update(tagNo, tagRequest);
+    }
 }

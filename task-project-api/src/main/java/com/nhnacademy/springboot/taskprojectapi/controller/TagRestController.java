@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
@@ -35,5 +36,10 @@ public class TagRestController {
     @GetMapping("/list/{projectNo}")
     public List<TagDto> getTagDtoList(@PathVariable("projectNo") Integer projectNo){
         return tagService.getTagDtoListBy(projectNo);
+    }
+
+    @GetMapping("{tagNo}")
+    public Optional<TagDto> getTagDto(@PathVariable("tagNo") Integer tagNo){
+        return tagService.getTagDto(tagNo);
     }
 }

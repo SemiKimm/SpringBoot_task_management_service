@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 public interface TagRepository extends JpaRepository<Tag, Integer> {
     @Transactional
@@ -20,4 +21,7 @@ public interface TagRepository extends JpaRepository<Tag, Integer> {
 
     @Query("select t from Tag t where t.project = :project")
     List<TagDto> findAllByProject(@Param("project") Project project);
+
+    @Query("select t from Tag t where t.no = :tagNo")
+    Optional<TagDto> findTagDtoBy(@Param("tagNo") Integer tagNo);
 }
