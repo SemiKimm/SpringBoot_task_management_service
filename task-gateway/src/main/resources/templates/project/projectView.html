@@ -21,6 +21,27 @@
     <a th:href="@{'/milestone/list/ACTIVE/'+${project.no}}">마일스톤 목록</a>
     <a th:href="@{'/tag/list/'+${project.no}}">태그 목록</a>
 </fieldset>
+<fieldset>
+    <legend>태스크 목록</legend>
+    <table style="border: solid black">
+        <thead>
+        <tr>
+            <th style="border: solid black">no.</th>
+            <th style="border: solid black">태스크 제목</th>
+            <th style="border: solid black">등록자</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="task : ${tasks}">
+            <td th:text="${task.no}" style="border: solid gray"></td>
+            <td style="border: solid gray">
+                <a th:href="@{'/task/view/'+${task.no}}" th:text="${task.title}"/>
+            </td>
+            <td th:text="${task.registrant.pk.participantId}" style="border: solid gray"></td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
 <a href="/project/list/ACTIVE">목록가기</a>
 </body>
 </html>
