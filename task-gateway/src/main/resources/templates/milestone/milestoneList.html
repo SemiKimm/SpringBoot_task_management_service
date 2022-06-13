@@ -18,6 +18,7 @@
     <th style="border: solid black">마일스톤 명</th>
     <th style="border: solid black">시작 날짜(생략 가능)</th>
     <th style="border: solid black">종료 날짜(생략 가능)</th>
+    <th style="border: solid black">종료</th>
     <th style="border: solid black">수정</th>
     <th style="border: solid black">삭제</th>
 </tr>
@@ -27,8 +28,12 @@
     <td th:text="${milestone.name}" style="border: solid gray"></td>
     <td th:text="${milestone.startDate}" style="border: solid gray"></td>
     <td th:text="${milestone.finishDate}" style="border: solid gray"></td>
-    <td style="border: solid gray"><a th:href="@{'milestone/modify'}">수정</a></td>
-    <td style="border: solid gray"><a th:href="@{'milestone/delete'}">삭제</a></td>
+    <td style="border: solid gray">
+        <a th:if="${#strings.equals(milestone.state,'활성')}" th:href="@{'/milestone/modify/'+${milestone.no}+'/FINISH/'+${projectNo}}">종료</a>
+        <a th:unless="${#strings.equals(milestone.state,'활성')}" th:href="@{'/milestone/modify/'+${milestone.no}+'/ACTIVE/'+${projectNo}}">복구</a>
+    </td>
+    <td style="border: solid gray"><a th:href="@{'/milestone/modify'}">수정</a></td>
+    <td style="border: solid gray"><a th:href="@{'/milestone/delete'}">삭제</a></td>
 </tr>
 </tbody>
 </table>

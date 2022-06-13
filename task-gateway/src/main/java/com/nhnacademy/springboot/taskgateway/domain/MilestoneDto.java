@@ -8,6 +8,7 @@ import java.time.LocalDate;
 public class MilestoneDto {
     private Integer no;
     private String name;
+    private String state;
     private LocalDate startDate;
     private LocalDate finishDate;
 }

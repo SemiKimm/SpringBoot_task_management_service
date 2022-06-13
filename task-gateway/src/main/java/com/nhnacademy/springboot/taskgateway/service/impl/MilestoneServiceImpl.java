@@ -7,6 +7,7 @@ import com.nhnacademy.springboot.taskgateway.exception.NotExistProjectException;
 import com.nhnacademy.springboot.taskgateway.request.MilestoneRequest;
 import com.nhnacademy.springboot.taskgateway.service.MilestoneService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.acls.model.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -39,5 +40,13 @@ public class MilestoneServiceImpl implements MilestoneService {
             milestoneRequest.setFinishDate(LocalDate.parse(milestoneRequest.getFinishDate()).format(DateTimeFormatter.ofPattern("yyyyMMdd")));
         }
         milestoneAdapter.create(projectNo, milestoneRequest);
+    }
+
+    @Override
+    public void modifyState(Integer milestoneNo, String state) {
+        if(milestoneAdapter.findMileStoneDto(milestoneNo).isEmpty()){
+            throw new NotFoundException("milestone");
+        }
+        milestoneAdapter.changeState(milestoneNo, state);
     }
 }

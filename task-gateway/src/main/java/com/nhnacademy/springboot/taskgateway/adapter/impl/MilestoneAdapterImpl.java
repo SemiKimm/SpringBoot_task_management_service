@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Component
@@ -40,5 +41,32 @@ public class MilestoneAdapterImpl implements MilestoneAdapter {
 
         ResponseEntity<AccountVO> exchange = restTemplate.exchange(requestEntity,
                 new ParameterizedTypeReference<>() {});
+    }
+
+    @Override
+    public void changeState(Integer milestoneNo, String state) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        httpHeaders.setAccept(List.of(MediaType.APPLICATION_JSON));
+
+        HttpEntity<String> requestEntity = new HttpEntity<>(httpHeaders);
+        ResponseEntity<Integer> exchange = restTemplate.exchange("http://localhost:9999/milestone/modify/" + milestoneNo + "/" + state,
+                HttpMethod.GET,
+                requestEntity,
+                new ParameterizedTypeReference<>() {});
+    }
+
+    @Override
+    public Optional<MilestoneDto> findMileStoneDto(Integer milestoneNo) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        httpHeaders.setAccept(List.of(MediaType.APPLICATION_JSON));
+
+        HttpEntity<String> requestEntity = new HttpEntity<>(httpHeaders);
+        ResponseEntity<Optional<MilestoneDto>> exchange = restTemplate.exchange("http://localhost:9999/milestone/" + milestoneNo,
+                HttpMethod.GET,
+                requestEntity,
+                new ParameterizedTypeReference<>() {});
+        return exchange.getBody();
     }
 }

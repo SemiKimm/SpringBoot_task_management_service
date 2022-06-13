@@ -48,6 +48,14 @@ public class MilestoneController {
             throw new ValidationException("milestone");
         }
         milestoneService.register(projectNo, milestoneRequest);
-        return "redirect:/milestone/list/ACTIVE/"+projectNo;
+        return "redirect:/milestone/list/ACTIVE/" + projectNo;
+    }
+
+    @GetMapping("/modify/{milestoneNo}/{state}/{projectNo}")
+    public String doModifyState(@PathVariable("milestoneNo") Integer milestoneNo,
+                                @PathVariable("state") String state,
+                                @PathVariable("projectNo") Integer projectNo){
+        milestoneService.modifyState(milestoneNo, state);
+        return "redirect:/milestone/list/ACTIVE/" + projectNo;
     }
 }

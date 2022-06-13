@@ -9,4 +9,6 @@ public interface MilestoneService {
     List<MilestoneDto> getMilestoneDtoList(Integer projectNo, String state);
 
     void register(Integer projectNo, MilestoneRequest milestoneRequest);
+
+    void modifyState(Integer milestoneNo, String state);
 }

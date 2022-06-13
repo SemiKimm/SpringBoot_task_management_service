@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -87,5 +88,10 @@ public class MilestoneServiceImpl implements MilestoneService {
                 .findById(projectNo)
                 .orElseThrow(() -> new IllegalStateException("not exist project : " + projectNo));
         return milestoneRepository.findAllByProjectAndState(project, State.valueOf(state).getState());
+    }
+
+    @Override
+    public Optional<MilestoneDto> getMileStoneDto(Integer milestoneNo) {
+        return milestoneRepository.findMilestoneDto(milestoneNo);
     }
 }

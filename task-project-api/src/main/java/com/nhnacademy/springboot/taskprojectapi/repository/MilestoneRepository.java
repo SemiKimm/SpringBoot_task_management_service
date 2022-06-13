@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public interface MilestoneRepository extends JpaRepository<Milestone, Integer> {
     @Transactional
@@ -33,4 +34,7 @@ public interface MilestoneRepository extends JpaRepository<Milestone, Integer> {
     @Query("select m from Milestone m where m.project = :project and m.state = :state")
     List<MilestoneDto> findAllByProjectAndState(@Param("project") Project project,
                                                 @Param("state") String state);
+
+    @Query("select m from Milestone m where m.no = :milestoneNo")
+    Optional<MilestoneDto> findMilestoneDto(@Param("milestoneNo") Integer milestoneNo);
 }
