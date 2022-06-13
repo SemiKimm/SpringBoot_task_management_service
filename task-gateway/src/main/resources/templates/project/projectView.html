@@ -19,7 +19,7 @@
     <a th:href="@{/project/modify/{projectNo}(projectNo=${project.no})}">편집</a>
     <a th:href="@{/participant/list/{projectNo}(projectNo=${project.no})}">프로젝트 구성원 목록</a>
     <a th:href="@{'/milestone/list/ACTIVE/'+${project.no}}">마일스톤 목록</a>
-    <a th:href="@{/}">태그 목록</a>
+    <a th:href="@{'/tag/list/'+${project.no}}">태그 목록</a>
 </fieldset>
 <a href="/project/list/ACTIVE">목록가기</a>
 </body>
