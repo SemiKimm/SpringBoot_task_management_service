@@ -81,4 +81,18 @@ public class MilestoneAdapterImpl implements MilestoneAdapter {
                 new ParameterizedTypeReference<>() {});
         return exchange.getBody();
     }
+
+    @Override
+    public String deleteByNo(Integer milestoneNo) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        httpHeaders.setAccept(List.of(MediaType.APPLICATION_JSON));
+
+        HttpEntity<String> requestEntity = new HttpEntity<>(httpHeaders);
+        ResponseEntity<String> exchange = restTemplate.exchange("http://localhost:9999/milestone/" + milestoneNo,
+                HttpMethod.DELETE,
+                requestEntity,
+                new ParameterizedTypeReference<>() {});
+        return exchange.getBody();
+    }
 }

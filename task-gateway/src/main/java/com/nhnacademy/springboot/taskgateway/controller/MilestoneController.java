@@ -80,4 +80,11 @@ public class MilestoneController {
         milestoneService.modify(milestoneNo, milestoneRequest);
         return "redirect:/milestone/list/ACTIVE/" + projectNo;
     }
+
+    @GetMapping("/delete/{milestoneNo}/{projectNo}")
+    public String doDelete(@PathVariable("milestoneNo") Integer milestoneNo,
+                           @PathVariable("projectNo") Integer projectNo){
+        milestoneService.delete(milestoneNo);
+        return "redirect:/milestone/list/ACTIVE/" + projectNo;
+    }
 }

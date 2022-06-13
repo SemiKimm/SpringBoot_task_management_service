@@ -16,4 +16,6 @@ public interface MilestoneAdapter {
     Optional<MilestoneDto> findMileStoneDto(Integer milestoneNo);
 
     Integer update(Integer milestoneNo, MilestoneRequest milestoneRequest);
+
+    String deleteByNo(Integer milestoneNo);
 }

@@ -58,6 +58,14 @@ public class MilestoneServiceImpl implements MilestoneService {
         milestoneAdapter.update(milestoneNo, milestoneRequest);
     }
 
+    @Override
+    public void delete(Integer milestoneNo) {
+        if(milestoneAdapter.findMileStoneDto(milestoneNo).isEmpty()){
+            throw new NotFoundException("milestone");
+        }
+        milestoneAdapter.deleteByNo(milestoneNo);
+    }
+
     private void parsing(MilestoneRequest milestoneRequest) {
         if(checkBlankDate(milestoneRequest)){
             milestoneRequest.setStartDate(null);
