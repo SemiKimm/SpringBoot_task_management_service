@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>태그 목록</title>
+</head>
+<body>
+<h1>태그 목록</h1>
+<a th:href="@{'/tag/register/'+${projectNo}}">태그 추가하기</a>
+<table style="border: solid black">
+    <thead>
+    <tr>
+        <th style="border: solid black">태그명</th>
+        <th style="border: solid black">수정</th>
+        <th style="border: solid black">삭제</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="tag:${tags}">
+        <td th:text="${tag.name}" style="border: solid gray"></td>
+        <td style="border: solid gray"><a th:href="@{'/tag/modify/'+${tag.no}+'/'+${projectNo}}">수정</a></td>
+        <td style="border: solid gray"><a th:href="@{'/tag/delete/'+${tag.no}+'/'+${projectNo}}">삭제</a></td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{'/project/view/'+${projectNo}}">프로젝트로 돌아가기</a>
+</body>
+</html>
