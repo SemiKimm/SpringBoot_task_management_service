@@ -32,13 +32,13 @@ public class AccountRestController {
         return accountService.getAccountDtoListBy(State.valueOf(state).getState());
     }
 
-    @GetMapping("/delete/{id}")
-    public String doDelete(@PathVariable("id") String id){
-        return accountService.delete(id);
+    @PutMapping("/{id}")
+    public String updateStateToInactivate(@PathVariable("id") String id){
+        return accountService.inactivate(id);
     }
 
-    @GetMapping("/inactivate/{id}")
-    public String doInactivate(@PathVariable("id") String id){
-        return accountService.inactivate(id);
+    @DeleteMapping("/{id}")
+    public String deleteAccount(@PathVariable("id") String id){
+        return accountService.delete(id);
     }
 }
