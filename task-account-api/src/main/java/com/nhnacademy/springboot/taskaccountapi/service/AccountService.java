@@ -12,9 +12,9 @@ public interface AccountService {
 
     Optional<AccountVO> getAccountVO(String id);
 
-    String delete(String id);
+    List<AccountDto> getAccountDtoListBy(String state);
 
     String inactivate(String id);
 
-    List<AccountDto> getAccountDtoListBy(String state);
+    String delete(String id);
 }

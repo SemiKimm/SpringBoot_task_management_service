@@ -40,24 +40,6 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public String delete(String id) {
-        if(!accountRepository.existsById(id)){
-            throw new IllegalStateException("not exist account : " + id);
-        }
-        accountRepository.updateAccountState(id, State.WITHDRAWAL.getState());
-        return "{\"result\":\"delete success\"}";
-    }
-
-    @Override
-    public String inactivate(String id) {
-        if(isDeletedAccount(id)){
-            throw new IllegalStateException("already deleted : " + id);
-        }
-        accountRepository.updateAccountState(id, State.DORMANCY.getState());
-        return "{\"result\":\"inactivate success\"}";
-    }
-
-    @Override
     public Optional<AccountVO> getAccountVO(String id) {
         Optional<Account> account = accountRepository
                 .findById(id);
@@ -78,6 +60,24 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public List<AccountDto> getAccountDtoListBy(String state) {
         return accountRepository.findAllByState(state);
+    }
+
+    @Override
+    public String inactivate(String id) {
+        if(isDeletedAccount(id)){
+            throw new IllegalStateException("already deleted : " + id);
+        }
+        accountRepository.updateAccountState(id, State.DORMANCY.getState());
+        return "{\"result\":\"inactivate success\"}";
+    }
+
+    @Override
+    public String delete(String id) {
+        if(!accountRepository.existsById(id)){
+            throw new IllegalStateException("not exist account : " + id);
+        }
+        accountRepository.updateAccountState(id, State.WITHDRAWAL.getState());
+        return "{\"result\":\"delete success\"}";
     }
 
     private boolean isDeletedAccount(String id){
