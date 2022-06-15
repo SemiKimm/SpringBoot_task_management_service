@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -21,23 +22,9 @@ public class AccountAdapterImpl implements AccountAdapter {
     private String host;
 
     @Override
-    public AccountVO getAccountVOBy(String username) {
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-        httpHeaders.setAccept(List.of(MediaType.APPLICATION_JSON));
-
-        HttpEntity<String> requestEntity = new HttpEntity<>(httpHeaders);
-        ResponseEntity<AccountVO> exchange = restTemplate.exchange(host+"/account/" + username,
-                HttpMethod.GET,
-                requestEntity,
-                new ParameterizedTypeReference<>() {});
-        return exchange.getBody();
-    }
-
-    @Override
     public AccountVO create(AccountRegisterRequestDto account) {
         RequestEntity<AccountRegisterRequestDto> requestEntity = RequestEntity
-                .post(host + "/account/register")
+                .post(host + "/accounts")
                 .accept(MediaType.APPLICATION_JSON)
                 .body(account);
 
@@ -48,17 +35,17 @@ public class AccountAdapterImpl implements AccountAdapter {
     }
 
     @Override
-    public boolean checkIdExists(String id) {
+    public Optional<AccountVO> getAccountVOBy(String username) {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         httpHeaders.setAccept(List.of(MediaType.APPLICATION_JSON));
 
         HttpEntity<String> requestEntity = new HttpEntity<>(httpHeaders);
-        ResponseEntity<Boolean> exchange = restTemplate.exchange(host + "/account/check/" + id,
+        ResponseEntity<Optional<AccountVO>> exchange = restTemplate.exchange(host+"/accounts/" + username,
                 HttpMethod.GET,
                 requestEntity,
                 new ParameterizedTypeReference<>() {});
-        return Boolean.TRUE.equals(exchange.getBody());
+        return exchange.getBody();
     }
 
     @Override
@@ -68,7 +55,7 @@ public class AccountAdapterImpl implements AccountAdapter {
         httpHeaders.setAccept(List.of(MediaType.APPLICATION_JSON));
 
         HttpEntity<String> requestEntity = new HttpEntity<>(httpHeaders);
-        ResponseEntity<List<AccountDto>> exchange = restTemplate.exchange(host + "/account/list/" + state,
+        ResponseEntity<List<AccountDto>> exchange = restTemplate.exchange(host + "/accounts?state=" + state,
                 HttpMethod.GET,
                 requestEntity,
                 new ParameterizedTypeReference<>() {});

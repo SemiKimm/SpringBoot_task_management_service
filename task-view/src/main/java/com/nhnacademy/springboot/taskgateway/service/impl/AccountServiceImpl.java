@@ -20,7 +20,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public AccountVO register(AccountRegisterRequest request) {
-        if(accountAdapter.checkIdExists(request.getId())){
+        if(accountAdapter.getAccountVOBy(request.getId()).isPresent()){
             throw new IllegalStateException("Id is duplicate");
         }
         return accountAdapter.create(AccountRegisterRequestDto.createMember(request.getId(),

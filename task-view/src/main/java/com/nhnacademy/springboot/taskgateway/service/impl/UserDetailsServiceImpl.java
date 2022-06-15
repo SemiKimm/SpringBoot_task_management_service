@@ -19,7 +19,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        AccountVO accountVO = accountAdapter.getAccountVOBy(username); //fixme : api 에서 not exist 로 error 나면 여기는 Null 넘어오나..? 확인해보기
+        AccountVO accountVO = accountAdapter.getAccountVOBy(username).orElseThrow(() -> new UsernameNotFoundException(username));
         if(!accountVO.getState().equals("가입")){
             throw new IllegalStateException("not valid state account : " + username);
         }
