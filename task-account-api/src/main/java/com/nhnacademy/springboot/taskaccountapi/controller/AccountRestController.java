@@ -9,16 +9,27 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/account")
+@RequestMapping("/accounts")
 public class AccountRestController {
     private final AccountService accountService;
 
-    @PostMapping("/register")
-    public AccountVO doRegister(@RequestBody AccountRequest accountRequest){
+    @PostMapping
+    public AccountVO postAccount(@RequestBody AccountRequest accountRequest){
         return accountService.register(accountRequest);
+    }
+
+    @GetMapping("/{id}")
+    public Optional<AccountVO> getAccount(@PathVariable("id") String id){
+        return accountService.getAccountVO(id);
+    }
+
+    @GetMapping
+    public List<AccountDto> getAccounts(@RequestParam("state") String state){
+        return accountService.getAccountDtoListBy(State.valueOf(state).getState());
     }
 
     @GetMapping("/delete/{id}")
@@ -29,20 +40,5 @@ public class AccountRestController {
     @GetMapping("/inactivate/{id}")
     public String doInactivate(@PathVariable("id") String id){
         return accountService.inactivate(id);
-    }
-
-    @GetMapping("/{id}")
-    public AccountVO getAccount(@PathVariable("id") String id){
-        return accountService.getAccountVO(id);
-    }
-
-    @GetMapping("/check/{id}")
-    public Boolean checkIdDuplication(@PathVariable("id") String id){
-        return accountService.isExists(id);
-    }
-
-    @GetMapping("/list/{state}")
-    public List<AccountDto> getAccountDtoList(@PathVariable("state") String state){
-        return accountService.getAccountDtoListBy(State.valueOf(state).getState());
     }
 }

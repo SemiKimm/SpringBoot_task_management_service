@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -57,20 +58,21 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountVO getAccountVO(String id) {
-        Account account = accountRepository
-                .findById(id)
-                .orElseThrow(() -> new IllegalStateException("not exist account : " + id));
-        return new AccountVO(account.getId(),
-                account.getPassword(),
-                account.getEmail(),
-                account.getState(),
-                account.getAuthority().getAuthority());
-    }
+    public Optional<AccountVO> getAccountVO(String id) {
+        Optional<Account> account = accountRepository
+                .findById(id);
 
-    @Override
-    public Boolean isExists(String id) {
-        return accountRepository.existsById(id);
+        Optional<AccountVO> accountVO = Optional.empty();
+        if(account.isPresent()){
+            Account accountTmp = account.get();
+            accountVO = Optional.of(new AccountVO(accountTmp.getId(),
+                    accountTmp.getPassword(),
+                    accountTmp.getEmail(),
+                    accountTmp.getState(),
+                    accountTmp.getAuthority().getAuthority()));
+        }
+
+        return accountVO;
     }
 
     @Override
